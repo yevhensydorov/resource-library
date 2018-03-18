@@ -10,7 +10,7 @@ class SearchResult extends React.Component {
       <li
         className="result-item"
         onClick={ event => {
-          this.props.playVideo(videoId)
+          this.props.playVideo(videoId);
         }}
       >
         <img
@@ -26,7 +26,7 @@ class SearchResult extends React.Component {
           {description}
         </div>
       </li>
-    )
+    );
   }
 };
 

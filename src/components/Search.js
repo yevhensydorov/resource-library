@@ -10,7 +10,7 @@ class Search extends React.Component {
     this.state = {
       query: '',
       results: []
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
