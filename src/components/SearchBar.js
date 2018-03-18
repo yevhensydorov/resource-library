@@ -1,35 +1,17 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-  constructor(props){
-    super(props);
-
-    this.state = {
-      value: ''
-    }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event){
-    this.setState({
-      value: event.target.value
-    });
-  }
-
-  handleSubmit(event){
-    event.preventDefault();
-  }
-
   render(){
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        className="d-flex justify-content-center"
+        onSubmit={this.props.handleSubmit}
+      >
         <input
           type="text"
-          name="search"
+          name="query"
           placeholder="Search..."
-          onChange={this.handleChange}
+          onChange={this.props.handleChange}
         />
         <button type="submit">Search</button>
       </form>

@@ -19,7 +19,9 @@
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-jest": "^22.4.1",
@@ -33,6 +35,7 @@
     "fetch-mock": "5.13.1",
     "jest": "^22.4.2",
     "react-test-renderer": "^16.2.0",
+    "redux-devtools": "^3.4.1",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   }

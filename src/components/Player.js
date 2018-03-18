@@ -5,7 +5,6 @@ class Player extends React.Component {
   constructor(props){
     super(props);
 
-    this.onPlayerReady = this.onPlayerReady.bind(this);
     this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
   }
 
@@ -14,25 +13,27 @@ class Player extends React.Component {
       this.player = new YT.Player('player', {
         height: '390',
         width: '640',
-        videoId: 'xsSnOQynTHs',
+        videoId: this.props.videoId,
         events: {
-          onReady: this.onPlayerReady,
           onStateChange: this.onPlayerStateChange
         }
       });
     }.bind(this);
   }
 
-  onPlayerReady( event ){
-    //event.target.playVideo();
-  }
-
   onPlayerStateChange( event ){
 
   }
 
-  playVideo( videoId ){
-    player.loadVideoById( videoId );
+  componentWillReceiveProps(nextProps){
+    const { videoId } = nextProps;
+    if(videoId !== this.props.videoId){
+      this.player.loadVideoById( videoId );
+    }
+  }
+
+  shouldComponentUpdate(){
+    return false;
   }
 
   render(){
