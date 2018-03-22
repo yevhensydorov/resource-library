@@ -1,27 +1,35 @@
 {
-  "name": "expense-tracker",
+  "name": "resource-library",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "npm test -- --watch",
     "dev": "webpack --mode development",
     "build": "webpack --mode production"
   },
-  "author": "",
+  "author": "Eugene",
   "license": "ISC",
   "babel": {
     "presets": [
       "babel-preset-react",
       "babel-preset-env"
+    ],
+    "plugins": [
+      "transform-es2015-destructuring",
+      "transform-object-rest-spread"
     ]
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "^22.4.1",
@@ -33,7 +41,7 @@
     "eslint": "^4.18.2",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-react": "^7.7.0",
-    "fetch-mock": "5.13.1",
+    "fetch-mock": "^5.13.1",
     "jest": "^22.4.2",
     "react-test-renderer": "^16.2.0",
     "redux-devtools": "^3.4.1",
