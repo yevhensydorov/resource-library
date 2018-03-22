@@ -38,9 +38,11 @@ class Form extends React.Component {
 		// const resource = this.state;
 		// this.props.receiver(resource);
 
+/////////////////////////////////////
 		//TODO
 			// FETCH POST REQUEST HERE
 		//TODO
+/////////////////////////////////////
 		} else {
 			this.setState({
 				validInput: false

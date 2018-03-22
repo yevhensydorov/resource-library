@@ -10,6 +10,11 @@ class App extends React.Component {
     }
   }
 
+///////////////////////////////////
+  // TODO
+  // FETCH DATA HERE
+  // TODO
+//////////////////////////////////
   render() {
     return (
       <div>
