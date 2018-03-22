@@ -1,9 +1,9 @@
-const router = require(express).Router();
+const router = require('express').Router();
 
 //ROUTES GO HERE
 
-router.get('/', (req, res) => {
-	res.status.sendFile('index.html');
+router.get('/test', (req, res) => {
+	res.send("Hello from test")
 });
 
 module.exports=router;
