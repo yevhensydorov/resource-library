@@ -53,11 +53,6 @@ class Form extends React.Component {
 			this.props.receiver(body);
 		})
 		.catch(err => console.log(err));  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
-
-/////////////////////////////////////
-
-		//AND PUSH THE DATA TO THE APP COMPONENT WITH RECEIVER
-/////////////////////////////////////
 		} else {
 			this.setState({
 				validInput: false

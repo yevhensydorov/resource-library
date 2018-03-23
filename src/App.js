@@ -39,22 +39,11 @@ class App extends React.Component {
   }
 
   getResourceItem(resourceItem) {
-    // console.log(resourceItem)
-    // console.log(this.state.resources)
-    const allResources = this.state.resources;
-    resourceItem.concat(allResources)
     this.setState({
-      resources: allResources
+      resources: this.state.resources.concat(resourceItem)
     });
   }
 
-///////////////////////////////////
-  // TODO
-  // FETCH DATA HERE
-  // TODO
-
-  //COMPONENTDIDMOUNT
-//////////////////////////////////
   render() {
     // console.log(this.state.resources)
     return (

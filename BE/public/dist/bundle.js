@@ -17975,23 +17975,10 @@ var App = function (_React$Component) {
   }, {
     key: 'getResourceItem',
     value: function getResourceItem(resourceItem) {
-      // console.log(resourceItem)
-      // console.log(this.state.resources)
-      var allResources = this.state.resources;
-      resourceItem.concat(allResources);
       this.setState({
-        resources: allResources
+        resources: this.state.resources.concat(resourceItem)
       });
     }
-
-    ///////////////////////////////////
-    // TODO
-    // FETCH DATA HERE
-    // TODO
-
-    //COMPONENTDIDMOUNT
-    //////////////////////////////////
-
   }, {
     key: 'render',
     value: function render() {
@@ -18108,11 +18095,6 @@ var Form = function (_React$Component) {
 				}).catch(function (err) {
 					return console.log(err);
 				}); // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
-
-				/////////////////////////////////////
-
-				//AND PUSH THE DATA TO THE APP COMPONENT WITH RECEIVER
-				/////////////////////////////////////
 			} else {
 				this.setState({
 					validInput: false
