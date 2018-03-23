@@ -19,11 +19,17 @@ router.get('/resources', (req, res) => {
 });
 
 router.post('/resources', (req, res) => {
-	db.any(`INSERT INTO resources (title, description, url) VALUES ('${req.body.title}', '${req.body.description}', '${req.body.url}')`);
-})
-
-router.get('/test', (req, res) => {
-	res.send("Hello from test")
+	const {title, description, url} = req.body;
+	db.any(`INSERT INTO resources (title, description, url) VALUES($1, $2, $3) RETURNING id`, [title, description, url])
+		.then(data => {
+			res.json(Object.assign({}, {id: data.id}, req.body));
+		})
+		.catch(error => {
+			res.json({
+				error: error.message
+			});
+		});
 });
+
 
 module.exports=router;

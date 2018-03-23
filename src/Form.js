@@ -36,8 +36,7 @@ class Form extends React.Component {
 		this.setState({
 			validInput: true
 		});
-		// const resource = this.state;
-		// this.props.receiver(resource);
+
 		const resourceItem = {
 			title: this.state.inputTitle,
 			description: this.state.inputDescription,
@@ -47,11 +46,13 @@ class Form extends React.Component {
 		fetch('/api/resources', {
 			method: 'POST',
 			body: JSON.stringify(resourceItem),
-			headers: {"Content-Type": "application/json"}
+			headers: {'Content-Type': 'application/json'}
 		})
 		.then(response => response.json())
-		.then(body => console.log(body))
-		.catch(err => console.log(err))  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
+		.then(body => {
+			this.props.receiver(body);
+		})
+		.catch(err => console.log(err));  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 
 /////////////////////////////////////
 
@@ -66,7 +67,6 @@ class Form extends React.Component {
 
 
 	render() {
-		// console.log(this.state);
 		return (
 			<form className='add-form' onSubmit={this.handleSubmit}>
 				<div>
