@@ -28,6 +28,19 @@
   color: red;
 }
 
+.db-error {
+  color: red;
+  font-size: 2rem;
+}
+
+.header h1 {
+  text-align: center;
+}
+
+.resources h2 {
+  text-align: center;
+}
+
 .btn {
   -moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
   -webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
@@ -65,4 +78,13 @@
 .btn:active {
   position:relative;
   top:1px;
+}
+
+.main-wrapper {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
 }

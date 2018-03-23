@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import Resources from './Resources';
+import Search from './Search';
 
 class App extends React.Component {
   constructor(props){
@@ -45,17 +46,26 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.resources)
     return (
       <div>
-        <h1>Resource Library</h1>
+        <div className='header'>
+          <h1>Resource Library</h1>
+        </div>
+        <div>
+          <Form 
+            receiver={this.getResourceItem}
+          />
+        </div>
+        <section className="main-wrapper">
+          <div>
+            <Resources resources={this.state.resources}/>      
+          </div>
+          <div>
+            <Search />
+          </div>
+        </section>
         
-        <Form 
-          receiver={this.getResourceItem}
-        />  
-        <Resources resources={this.state.resources}/>
       </div>
-      
     );
   };
 };

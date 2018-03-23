@@ -9,7 +9,8 @@ class Form extends React.Component {
 			inputDescription: '',
 			inputUrl: '',
 			validInput: 'blank',
-			isResourcesSend: false
+			isResourcesNotSend: false,
+			error: null
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -22,7 +23,8 @@ class Form extends React.Component {
 
 
 		this.setState({
-			[name]: value
+			[name]: value,
+			validInput: true
 		});
 	};
 
@@ -52,7 +54,12 @@ class Form extends React.Component {
 		.then(body => {
 			this.props.receiver(body);
 		})
-		.catch(err => console.log(err));  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
+		.catch(err => {
+			this.setState({
+				isResourcesNotSend: true,
+				error: err
+			})
+		});  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 		} else {
 			this.setState({
 				validInput: false
@@ -99,6 +106,7 @@ class Form extends React.Component {
 				 <p className={this.state.validInput !== false ? 'hidden' : 'validation-error'}>
 				 	Please fill out inputs
 				 </p>
+				 <p className={this.state.isResourcesNotSend !== false ? 'hidden' : 'db-error'}>{this.state.error}</p>
 			</form>
 		);
 	};
