@@ -8,7 +8,8 @@ class Form extends React.Component {
 			inputTitle: '',
 			inputDescription: '',
 			inputUrl: '',
-			validInput: 'blank'
+			validInput: 'blank',
+			isResourcesSend: false
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -37,11 +38,24 @@ class Form extends React.Component {
 		});
 		// const resource = this.state;
 		// this.props.receiver(resource);
+		const resourceItem = {
+			title: this.state.inputTitle,
+			description: this.state.inputDescription,
+			url: this.state.inputUrl
+		};
+
+		fetch('/api/resources', {
+			method: 'POST',
+			body: JSON.stringify(resourceItem),
+			headers: {"Content-Type": "application/json"}
+		})
+		.then(response => response.json())
+		.then(body => console.log(body))
+		.catch(err => console.log(err))  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 
 /////////////////////////////////////
-		//TODO
-			// FETCH POST REQUEST HERE
-		//TODO
+
+		//AND PUSH THE DATA TO THE APP COMPONENT WITH RECEIVER
 /////////////////////////////////////
 		} else {
 			this.setState({
@@ -52,34 +66,40 @@ class Form extends React.Component {
 
 
 	render() {
+		// console.log(this.state);
 		return (
 			<form className='add-form' onSubmit={this.handleSubmit}>
-				<label htmlFor="inputTitle">Resource Title</label>
-				<input 
-					type="text"
-					onChange={this.handleChange}
-					value={this.state.inputTitle}
-					id='inputTitle'
-					name='inputTitle'
-				/>
+				<div>
+					<label htmlFor="inputTitle">Resource Title</label>
+					<input 
+						type="text"
+						onChange={this.handleChange}
+						value={this.state.inputTitle}
+						id='inputTitle'
+						name='inputTitle'
+					/>
+				</div>
+				<div>
+					<label htmlFor="inputTitle">Resource Description</label>				
+					<input
+						type="text"
+						onChange={this.handleChange}
+						value={this.state.inputDescription}
+						id='inputDescription'
+						name='inputDescription'
+					/>
+				</div>
 
-				<label htmlFor="inputTitle">Resource Description</label>				
-				<input
-					type="text"
-					onChange={this.handleChange}
-					value={this.state.inputDescription}
-					id='inputDescription'
-					name='inputDescription'
-				/>
-				
-				<label htmlFor="inputTitle">Resource Url</label>
-				<input
-					type="text"
-					onChange={this.handleChange}
-					value={this.state.inputUrl}
-					id='inputUrl'
-					name='inputUrl'
-				 />
+				<div>
+					<label htmlFor="inputTitle">Resource Url</label>
+					<input
+						type="text"
+						onChange={this.handleChange}
+						value={this.state.inputUrl}
+						id='inputUrl'
+						name='inputUrl'
+					 />
+				</div>
 				 <button type='submit'>Submit</button>
 				 <p className={this.state.validInput !== false ? 'hidden' : 'validation-error'}>
 				 	Please fill out inputs

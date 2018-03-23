@@ -6,14 +6,16 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      data: []
-    }
+      resources: []
+    };
   }
 
 ///////////////////////////////////
   // TODO
   // FETCH DATA HERE
   // TODO
+  
+  //COMPONENTDIDMOUNT
 //////////////////////////////////
   render() {
     return (

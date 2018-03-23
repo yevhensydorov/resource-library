@@ -17935,7 +17935,7 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      data: []
+      resources: []
     };
     return _this;
   }
@@ -17944,6 +17944,8 @@ var App = function (_React$Component) {
   // TODO
   // FETCH DATA HERE
   // TODO
+
+  //COMPONENTDIDMOUNT
   //////////////////////////////////
 
 
@@ -18014,7 +18016,8 @@ var Form = function (_React$Component) {
 			inputTitle: '',
 			inputDescription: '',
 			inputUrl: '',
-			validInput: 'blank'
+			validInput: 'blank',
+			isResourcesSend: false
 		};
 
 		_this.handleChange = _this.handleChange.bind(_this);
@@ -18040,11 +18043,27 @@ var Form = function (_React$Component) {
 				});
 				// const resource = this.state;
 				// this.props.receiver(resource);
+				var resourceItem = {
+					title: this.state.inputTitle,
+					description: this.state.inputDescription,
+					url: this.state.inputUrl
+				};
+
+				fetch('/api/resources', {
+					method: 'POST',
+					body: JSON.stringify(resourceItem),
+					headers: { "Content-Type": "application/json" }
+				}).then(function (response) {
+					return response.json();
+				}).then(function (body) {
+					return console.log(body);
+				}).catch(function (err) {
+					return console.log(err);
+				}); // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 
 				/////////////////////////////////////
-				//TODO
-				// FETCH POST REQUEST HERE
-				//TODO
+
+				//AND PUSH THE DATA TO THE APP COMPONENT WITH RECEIVER
 				/////////////////////////////////////
 			} else {
 				this.setState({
@@ -18055,45 +18074,58 @@ var Form = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			// console.log(this.state);
 			return _react2.default.createElement(
 				'form',
 				{ className: 'add-form', onSubmit: this.handleSubmit },
 				_react2.default.createElement(
-					'label',
-					{ htmlFor: 'inputTitle' },
-					'Resource Title'
+					'div',
+					null,
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'inputTitle' },
+						'Resource Title'
+					),
+					_react2.default.createElement('input', {
+						type: 'text',
+						onChange: this.handleChange,
+						value: this.state.inputTitle,
+						id: 'inputTitle',
+						name: 'inputTitle'
+					})
 				),
-				_react2.default.createElement('input', {
-					type: 'text',
-					onChange: this.handleChange,
-					value: this.state.inputTitle,
-					id: 'inputTitle',
-					name: 'inputTitle'
-				}),
 				_react2.default.createElement(
-					'label',
-					{ htmlFor: 'inputTitle' },
-					'Resource Description'
+					'div',
+					null,
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'inputTitle' },
+						'Resource Description'
+					),
+					_react2.default.createElement('input', {
+						type: 'text',
+						onChange: this.handleChange,
+						value: this.state.inputDescription,
+						id: 'inputDescription',
+						name: 'inputDescription'
+					})
 				),
-				_react2.default.createElement('input', {
-					type: 'text',
-					onChange: this.handleChange,
-					value: this.state.inputDescription,
-					id: 'inputDescription',
-					name: 'inputDescription'
-				}),
 				_react2.default.createElement(
-					'label',
-					{ htmlFor: 'inputTitle' },
-					'Resource Url'
+					'div',
+					null,
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'inputTitle' },
+						'Resource Url'
+					),
+					_react2.default.createElement('input', {
+						type: 'text',
+						onChange: this.handleChange,
+						value: this.state.inputUrl,
+						id: 'inputUrl',
+						name: 'inputUrl'
+					})
 				),
-				_react2.default.createElement('input', {
-					type: 'text',
-					onChange: this.handleChange,
-					value: this.state.inputUrl,
-					id: 'inputUrl',
-					name: 'inputUrl'
-				}),
 				_react2.default.createElement(
 					'button',
 					{ type: 'submit' },
