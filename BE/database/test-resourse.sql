@@ -3,7 +3,7 @@ CREATE TABLE resources (
 	title varchar not null,
 	description varchar not null,
 	url varchar not null
-)
+);
 
 
 INSERT INTO resources (title, description, url) values ('The Web Developer Bootcamp', 'The only course you need to learn web development - HTML, CSS, JS, Node, and More!', 'https://udemy.com/the-web-developer-bootcamp/learn/v4/');

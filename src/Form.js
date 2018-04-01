@@ -58,7 +58,7 @@ class Form extends React.Component {
 			this.setState({
 				isResourcesNotSend: true,
 				error: err
-			})
+			});
 		});  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 		} else {
 			this.setState({

@@ -1,15 +1,22 @@
 const router = require('express').Router();
 const pgp = require('pg-promise')();
 
+let connection;
 
-const db = pgp({
-	host: 'localhost',
-	port: 5432,
-	database: process.env.DATABASE,
-	user: process.env.USERNAME,
-	password: process.env.PASSWORD
-});
+if (process.env.DATABASE_URL) {
+	// https://docs.run.pivotal.io/devguide/deploy-apps/environment-variable.html#DATABASE-URL
+	connection = process.env.DATABASE_URL;
+} else {
+	connection = {
+    host: 'localhost',
+    port: 5432,
+    database: process.env.DATABASE,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD
+  };
+}
 
+const db = pgp(connection);
 
 //ROUTES GO HERE
 router.get('/resources', (req, res) => {
