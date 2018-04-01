@@ -1,0 +1,9 @@
+node_modules/
+tests/
+src/
+.envrc
+.eslintrc
+.gitignore
+jest.config.js
+README.md
+webpack.config.js
