@@ -1,5 +1,5 @@
 const SERVER_PORT = process.env.PORT || 7000;
-
+console.log(process.env.DATABASE);
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./BE/routers/router');
@@ -9,9 +9,8 @@ app.use(bodyParser.json());
 app.use('/api', router);
 app.use(express.static('BE/public'));
 
-
 app.get('/', (req, res) => {
-	res.status.sendFile('index.html');
+  res.status.sendFile('index.html');
 });
 
 app.listen(SERVER_PORT, () => {
