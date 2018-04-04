@@ -3,13 +3,16 @@ import React from 'react';
 class Search extends React.Component {
 	render() {
 		return (
-			<form>
-				<input
-				 type="text"
-				 placeholder='Search for Resource'
-				 name='resourceSearch'
-				/>
-			</form>
+			<form style={{paddingTop:'12px'}} >
+			<div>
+			  <input 
+			  type="search" 
+			  name="resourceSearch"
+			  placeholder="Search for resouces..." 
+			  size="30"/>
+			  <button type='search' ><i class="fa fa-search"></i></button>
+			</div>
+		  </form>
 		);
 	}
 }

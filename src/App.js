@@ -4,7 +4,7 @@ import Resources from './Resources';
 import Search from './Search';
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -20,7 +20,7 @@ class App extends React.Component {
   componentDidMount() {
     fetch('/api/resources')
       .then(res => {
-        if(res.status >= 200 && res.status < 300) {
+        if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
           throw new Error('HTTP error');
@@ -48,23 +48,28 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className='header'>
-          <h1>Resource Library</h1>
-        </div>
-        <div>
-          <Form 
-            receiver={this.getResourceItem}
-          />
-        </div>
-        <section className="main-wrapper">
-          <div>
-            <Resources resources={this.state.resources}/>      
+        <div className='header row col-sm-12'>
+          <div className='col-sm-8' >
+            <h1>Resource Library</h1>
           </div>
-          <div>
+          <div className='col-sm-4 pull-right'>
             <Search />
           </div>
-        </section>
-        
+        </div>
+        <br />
+        <div className='row' >
+          <div className='col-sm-4' >
+            <Form
+              receiver={this.getResourceItem}
+            />
+          </div>
+          <section className="main-wrapper col-sm-8">
+            <div>
+              <Resources resources={this.state.resources} />
+            </div>
+          </section>
+        </div>
+
       </div>
     );
   };
