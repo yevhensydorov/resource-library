@@ -1,5 +1,7 @@
 # Resources Library
 
+[![Build Status](https://travis-ci.org/yevhensydorov/resource-library.svg?branch=master)](https://travis-ci.org/yevhensydorov/resource-library)
+
 ## Getting Started
 
 * This repo is frontend and backend
