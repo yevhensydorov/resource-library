@@ -10,7 +10,7 @@ class Search extends React.Component {
 			  name="resourceSearch"
 			  placeholder="Search for resouces..." 
 			  size="30"/>
-			  <button type='search' ><i class="fa fa-search"></i></button>
+			  <button type='search' ><i className ="fa fa-search"></i></button>
 			</div>
 		  </form>
 		);
