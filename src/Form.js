@@ -70,6 +70,7 @@ class Form extends React.Component {
 
 	render() {
 		return (
+			<div className='form' >			
 			<form className='add-form' onSubmit={this.handleSubmit}>
 				<div>
 					<label htmlFor="inputTitle">Resource Title</label>
@@ -108,6 +109,8 @@ class Form extends React.Component {
 				 </p>
 				 <p className={this.state.isResourcesNotSend !== false ? 'hidden' : 'db-error'}>{this.state.error}</p>
 			</form>
+			</div>
+			
 		);
 	};
 };
