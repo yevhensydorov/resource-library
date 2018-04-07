@@ -6,10 +6,10 @@ class ResourceItem extends Component {
 		this.state = {
 			likes: 0
 		};
-		this.Liking = this.Liking.bind(this);
+		this.liking = this.liking.bind(this);
 	  }
 
-	Liking() {
+	liking() {
 		this.setState({ likes: this.state.likes + 1 });
 		// console.log(this.state.likes)
 	  };
@@ -23,7 +23,7 @@ class ResourceItem extends Component {
 				</div>
 			 	<p>{description}</p>
 				 <div className='row' >
-				 <button className='like-button' onClick={this.Liking}><i className ="large material-icons">thumb_up</i></button>
+				 <button className='like-button' onClick={this.liking}><i className ="large material-icons">thumb_up</i></button>
 				 <h3 style={{paddingLeft:'10px'}} >{this.state.likes} like(s)</h3> 
 				 </div>
 				<br />
