@@ -11,10 +11,12 @@ class App extends React.Component {
       resources: [],
       isFetched: false,
       isLoading: false,
+      search: '',
       error: null
     };
 
     this.getResourceItem = this.getResourceItem.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -45,34 +47,38 @@ class App extends React.Component {
     });
   }
 
+  handleSearch(event) {
+    this.setState({
+      search: event.target.value
+    });
+  }
+
   render() {
+    const { search, resources } = this.state;
     return (
       <div>
-        <div className='header row col-sm-12'>
-          <div className='col-sm-8' >
+        <div className="header row col-sm-12">
+          <div className="col-sm-8">
             <h1>Resource Library</h1>
           </div>
-          <div className='col-sm-4 pull-right'>
-            <Search />
+          <div className="col-sm-4 pull-right">
+            <Search search={search} handleSearch={this.handleSearch} />
           </div>
         </div>
         <br />
-        <div className='row' >
-          <div className='col-sm-4' >
-            <Form
-              receiver={this.getResourceItem}
-            />
+        <div className="row">
+          <div className="col-sm-4">
+            <Form receiver={this.getResourceItem} />
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              <Resources resources={this.state.resources} />
+              <Resources search={search} resources={resources} />
             </div>
           </section>
         </div>
-
       </div>
     );
-  };
-};
+  }
+}
 
 export default App;
