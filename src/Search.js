@@ -3,18 +3,18 @@ import React from 'react';
 class Search extends React.Component {
   render() {
     return (
-      <form style={{ paddingTop: '12px' }}>
+      <form style={{ paddingTop: '2px' }}>
         <div>
           <input
-            type="search"
+            type='search'
             value={this.props.search}
             onChange={this.props.handleSearch}
-            name="resourceSearch"
-            placeholder="Search for resouces..."
-            size="30"
+            name='resourceSearch'
+            placeholder='Search for resouces...'
+            size='30'
           />
-          <button type="search">
-            <i className="fa fa-search" />
+          <button type='search'>
+            <i className='fa fa-search' />
           </button>
         </div>
       </form>

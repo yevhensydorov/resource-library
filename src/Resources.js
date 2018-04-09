@@ -20,9 +20,14 @@ class Resources extends React.Component {
       }
     );
     return (
-      <section className="resources">
-        <h2>Resources</h2>
+      <section className='resources'>
+      <div className='row' >
+        <h2 className='pull-left' >Resources</h2>
+      </div>
+      <br />
+      <div>      
         {resourcesComponentsArray}
+      </div>
       </section>
     );
   }
