@@ -7,6 +7,8 @@ class Resources extends React.Component {
     const filteredResources = resources.filter(Title =>
       Title.title.toLowerCase().includes(this.props.search)
     );
+    // console.log(this.props)
+    
     let resourcesComponentsArray = filteredResources.map(
       (resourceInfo, index) => {
         return (
@@ -15,6 +17,7 @@ class Resources extends React.Component {
             title={resourceInfo.title}
             description={resourceInfo.description}
             url={resourceInfo.url}
+            numberOfVotes={resourceInfo.num_of_votes}
           />
         );
       }
