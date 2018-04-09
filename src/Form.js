@@ -84,7 +84,7 @@ class Form extends React.Component {
 								id='inputTitle'
 								name='inputTitle'
 								placeholder=' Type your title...'
-								
+
 							/>
 						</div>
 						<div>
@@ -95,7 +95,7 @@ class Form extends React.Component {
 								value={this.state.inputDescription}
 								id='inputDescription'
 								name='inputDescription'
-								placeholder=' Type your description...'								
+								placeholder=' Type your description...'
 							/>
 						</div>
 
@@ -107,7 +107,7 @@ class Form extends React.Component {
 								value={this.state.inputUrl}
 								id='inputUrl'
 								name='inputUrl'
-								placeholder=' Inter your URL...'								
+								placeholder=' Inter your URL...'
 							/>
 						</div>
 						<button type='submit'>Submit</button>

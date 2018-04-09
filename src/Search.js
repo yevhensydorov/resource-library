@@ -3,7 +3,7 @@ import React from 'react';
 class Search extends React.Component {
   render() {
     return (
-      <form style={{ paddingTop: '2px' }}>
+      <form className='search-form' >
         <div>
           <input
             type='search'
