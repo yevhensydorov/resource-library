@@ -1,13 +1,16 @@
-import React from 'react';
-import ResourceItem from './ResourceItem';
+import React from "react";
+import ResourceItem from "./ResourceItem";
 
 class Resources extends React.Component {
   render() {
-    const { resources } = this.props;
-    const filteredResources = resources.filter(Title =>
-      Title.title.toLowerCase().includes(this.props.search)
+    const { resources, search } = this.props;
+    let query = search.toLowerCase();
+    const filteredResources = resources.filter(
+      ({ title, description }) =>
+        title.toLowerCase().includes(query) ||
+        description.toLowerCase().includes(query)
     );
-    let resourcesComponentsArray = filteredResources.map(
+    const resourcesComponentsArray = filteredResources.map(
       (resourceInfo, index) => {
         return (
           <ResourceItem
@@ -19,6 +22,7 @@ class Resources extends React.Component {
         );
       }
     );
+
     return (
       <section className="resources">
         <h2>Resources</h2>
