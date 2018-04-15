@@ -10,20 +10,22 @@ class ResourceItem extends Component {
   }
 
   handleUpVote() {
+    const votes = { votes: this.state.likes + 1 };
+
     this.setState({ likes: this.state.likes + 1 });
-    // const votes = this.state.likes;
-    // fetch('/api/add-vote', {
-    // 	method: 'POST',
-    // 	body: votes,
-    // 	headers: {'Content-Type': 'application/json'}
-    // })
-    // .then(response => response.json())
-    // .then(body => {
-    // 	console.log(body);
-    // })
-    // .catch(err => {
-    // 	console.log(err);
-    // })
+    // console.log(votes);
+    fetch("/api/add-vote", {
+      method: "POST",
+      body: JSON.stringify(votes),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(response => response.json())
+      .then(body => {
+        console.log(body);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
