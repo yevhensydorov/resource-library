@@ -43,10 +43,4 @@ router.post("/resources", (req, res) => {
     });
 });
 
-router.post("/add-vote", (req, res) => {
-  // console.log(req.body);
-  // const { votes } = req.body;
-  // console.log(votes);
-});
-
 module.exports = router;
