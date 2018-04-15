@@ -4,45 +4,43 @@ class ResourceItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      likes: this.props.numberOfVotes
+      likes: this.props.numberOfVotes,
+      liked: false
     };
-    this.handleUpVote = this.handleUpVote.bind(this);
+    this.liking = this.liking.bind(this);
   }
 
-  handleUpVote() {
-    const votes = { votes: this.state.likes + 1 };
-
-    this.setState({ likes: this.state.likes + 1 });
-    // console.log(votes);
-    fetch("/api/add-vote", {
-      method: "POST",
-      body: JSON.stringify(votes),
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(response => response.json())
-      .then(body => {
-        console.log(body);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  liking() {
+    const { likes, liked } = this.state;
+    const newLikesNumber = liked ? likes - 1 : likes + 1;
+    this.setState({
+      likes: newLikesNumber,
+      liked: !liked
+    });
   }
 
   render() {
+    const label = this.state.liked ? (
+      <i className="fa fa-heart fa-2x red-heart" />
+    ) : (
+      <i className="fa fa-heart fa-2x" />
+    );
     const { title, description, url } = this.props;
     return (
       <article className="resource-item">
-        <div>
+        <div className="row">
           <a href={url}>
             <h3>{title}</h3>
           </a>
         </div>
-        <p>{description}</p>
         <div className="row">
-          <button className="like-button" onClick={this.handleUpVote}>
-            <i className="large material-icons">thumb_up</i>
-          </button>
-          <h3 style={{ paddingLeft: "10px" }}>{this.state.likes} like(s)</h3>
+          <p>{description}</p>
+        </div>
+        <div className="row">
+          <a className="heart-button" onClick={this.liking}>
+            {label}
+          </a>
+          <h5>{this.state.likes} heart(s)</h5>
         </div>
         <br />
         <br />
