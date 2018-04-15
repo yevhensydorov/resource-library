@@ -2,3 +2,4 @@
 /BE/public/dist
 .DS_Store
 .envrc
+*.log
