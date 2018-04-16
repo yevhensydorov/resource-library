@@ -7,10 +7,10 @@ class ResourceItem extends Component {
       likes: this.props.numberOfVotes,
       liked: false
     };
-    this.liking = this.liking.bind(this);
+    this.handleUpVote = this.handleUpVote.bind(this);
   }
 
-  liking() {
+  handleUpVote() {
     const { likes, liked } = this.state;
     const newLikesNumber = liked ? likes - 1 : likes + 1;
     this.setState({
@@ -23,8 +23,8 @@ class ResourceItem extends Component {
     const label = this.state.liked ? (
       <i className="fa fa-heart fa-2x red-heart" />
     ) : (
-      <i className="fa fa-heart fa-2x" />
-    );
+        <i className="fa fa-heart fa-2x" />
+      );
     const { title, description, url } = this.props;
     return (
       <article className="resource-item">
@@ -37,7 +37,7 @@ class ResourceItem extends Component {
           <p>{description}</p>
         </div>
         <div className="row">
-          <a className="heart-button" onClick={this.liking}>
+          <a className="heart-button" onClick={this.handleUpVote}>
             {label}
           </a>
           <h5>{this.state.likes} heart(s)</h5>
