@@ -43,4 +43,15 @@ router.post("/resources", (req, res) => {
     });
 });
 
+router.post('/add-vote', (req, res) => {
+  const { id, votes } = req.body;
+  db.any(`UPDATE resources SET num_of_votes = $1 WHERE id = $2`, [votes, id])
+    .then(data => res.json(data))
+    .catch(error => {
+      res.json({
+        error: error.message
+      });
+    });
+});
+
 module.exports = router;

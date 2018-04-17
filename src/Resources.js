@@ -14,6 +14,7 @@ class Resources extends React.Component {
       .map((resourceInfo, index) => (
         <ResourceItem
           key={index}
+          id={resourceInfo.id}
           title={resourceInfo.title}
           description={resourceInfo.description}
           url={resourceInfo.url}
@@ -22,10 +23,10 @@ class Resources extends React.Component {
       ));
 
     return (
-      <section className="resources">
+      < section className="resources" >
         <h2>Resources</h2>
         {filteredResources}
-      </section>
+      </section >
     );
   }
 }

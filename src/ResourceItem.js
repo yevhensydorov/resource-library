@@ -5,7 +5,8 @@ class ResourceItem extends Component {
     super(props);
     this.state = {
       likes: this.props.numberOfVotes,
-      liked: false
+      liked: false,
+      error: null
     };
     this.handleUpVote = this.handleUpVote.bind(this);
   }
@@ -17,6 +18,19 @@ class ResourceItem extends Component {
       likes: newLikesNumber,
       liked: !liked
     });
+    const votes = {
+      id: this.props.id,
+      votes: newLikesNumber
+    }
+    fetch('api/add-vote', {
+      method: 'POST',
+      body: JSON.stringify(votes),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(response => response.json())
+      .catch(err => {
+        this.setState({ error: err })
+      })
   }
 
   render() {
