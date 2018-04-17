@@ -17,6 +17,19 @@ class ResourceItem extends Component {
       likes: newLikesNumber,
       liked: !liked
     });
+    const votes = {
+      id: this.props.id,
+      votes: newLikesNumber
+    }
+    fetch('api/add-vote', {
+      method: 'POST',
+      body: JSON.stringify(votes),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(response => response.json())
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
