@@ -53,6 +53,10 @@ class App extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
   render() {
     const { search, resources } = this.state;
     return (
@@ -62,7 +66,7 @@ class App extends React.Component {
             <h1>Resource Library</h1>
           </div>
           <div className="col-sm-4 pull-right">
-            <Search search={search} handleSearch={this.handleSearch} />
+            <Search search={search} handleSearch={this.handleSearch} handleSubmit={this.handleSubmit} />
           </div>
         </div>
         <br />
