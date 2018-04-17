@@ -5,7 +5,8 @@ class ResourceItem extends Component {
     super(props);
     this.state = {
       likes: this.props.numberOfVotes,
-      liked: false
+      liked: false,
+      error: null
     };
     this.handleUpVote = this.handleUpVote.bind(this);
   }
@@ -28,7 +29,7 @@ class ResourceItem extends Component {
     })
       .then(response => response.json())
       .catch(err => {
-        console.log(err);
+        this.setState({ error: err })
       })
   }
 
