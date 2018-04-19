@@ -6,6 +6,7 @@ class Resources extends React.Component {
     const { resources, search } = this.props;
     let query = search.toLowerCase();
     const filteredResources = resources
+      .sort((a, b) => b.num_of_votes - a.num_of_votes)
       .filter(
         ({ title, description }) =>
           title.toLowerCase().includes(query) ||
@@ -23,10 +24,10 @@ class Resources extends React.Component {
       ));
 
     return (
-      < section className="resources" >
+      <section className="resources">
         <h2>Resources</h2>
         {filteredResources}
-      </section >
+      </section>
     );
   }
 }
