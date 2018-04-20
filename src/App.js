@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import Resources from './Resources';
 import Search from './Search';
+import Sidebar from './Sidebar';
 
 class App extends React.Component {
   constructor(props) {
@@ -72,13 +73,14 @@ class App extends React.Component {
         <br />
         <div className="row">
           <div className="col-sm-4">
-            <Form receiver={this.getResourceItem} />
+            <Sidebar />
           </div>
-          <section className="main-wrapper col-sm-8">
-            <div>
+            <div className="main-wrapper col-sm-4">
               <Resources search={search} resources={resources} />
             </div>
-          </section>
+            <div className="col-sm-4">
+            <Form receiver={this.getResourceItem} />
+          </div> 
         </div>
       </div>
     );

@@ -36,7 +36,10 @@ class Form extends React.Component {
 			this.state.inputUrl !== ''
 		) {
 			this.setState({
-				validInput: true
+				validInput: true,
+				inputTitle: '',
+				inputDescription: '',
+				inputUrl: ''
 			});
 
 			const resourceItem = {
@@ -62,7 +65,7 @@ class Form extends React.Component {
 				});  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 		} else {
 			this.setState({
-				validInput: false
+				validInput: false,
 			});
 		}
 	}
@@ -122,7 +125,5 @@ class Form extends React.Component {
 		);
 	};
 };
-
-
 
 export default Form;
