@@ -43,7 +43,7 @@ class ResourceItem extends Component {
     return (
       <article className="resource-item">
         <div className="row">
-          <a href={url}>
+          <a className='titles' href={url}>
             <h3>{title}</h3>
           </a>
         </div>

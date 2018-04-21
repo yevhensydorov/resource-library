@@ -25,7 +25,6 @@ class Resources extends React.Component {
 
     return (
       <section className="resources">
-        <h2>Resources</h2>
         {filteredResources}
       </section>
     );

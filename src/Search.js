@@ -3,14 +3,15 @@ import React from 'react';
 class Search extends React.Component {
   render() {
     return (
-      <form className='search-form' onSubmit={this.props.handleSubmit}>
+      <form className='search-form search' onSubmit={this.props.handleSubmit}>
         <div>
+          <span><i className="fa fa-search"></i></span>
           <input
             type='search'
             value={this.props.search}
             onChange={this.props.handleSearch}
             name='resourceSearch'
-            placeholder='Search for resouces... &#xf002;'
+            placeholder='Search for resouces...'
             size='30'
           />
         </div>
@@ -18,5 +19,4 @@ class Search extends React.Component {
     );
   }
 }
-
 export default Search;

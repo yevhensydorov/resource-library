@@ -1,88 +1,33 @@
-import React from 'react';
-import Form from './Form';
-import Resources from './Resources';
-import Search from './Search';
-import Sidebar from './Sidebar';
+import React, { Component } from 'react';
+import Home from "./pages/Home.js"
+import Html from "./pages/Html.js"
+import Css from "./pages/Css.js"
+import JavaScript from "./pages/JavaScript.js"
+import Node from "./pages/Node.js"
+import Reactjs from "./pages/React.js"
+import Sql from "./pages/Sql.js"
+// import MangoDB from "./pages/MangoDB.js"
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      resources: [],
-      isFetched: false,
-      isLoading: false,
-      search: '',
-      error: null
-    };
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-    this.getResourceItem = this.getResourceItem.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  componentDidMount() {
-    fetch('/api/resources')
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          return res;
-        } else {
-          throw new Error('HTTP error');
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          resources: data
-        });
-      })
-      .catch(err => {
-        this.setState({
-          error: err.toString()
-        });
-      });
-  }
-
-  getResourceItem(resourceItem) {
-    this.setState({
-      resources: this.state.resources.concat(resourceItem)
-    });
-  }
-
-  handleSearch(event) {
-    this.setState({
-      search: event.target.value
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-  }
-
+class App extends Component {
   render() {
-    const { search, resources } = this.state;
     return (
-      <div>
-        <div className="header row col-sm-12">
-          <div className="col-sm-8">
-            <h1>Resource Library</h1>
-          </div>
-          <div className="col-sm-4 pull-right">
-            <Search search={search} handleSearch={this.handleSearch} handleSubmit={this.handleSubmit} />
-          </div>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path='/' component={Home} exact />
+            <Route path='/html' component={Html} exact />
+            <Route path='/css' component={Css} exact />
+            <Route path='/javascript' component={JavaScript} exact />
+            <Route path='/node' component={Node} exact />
+            <Route path='/react' component={Reactjs} exact />
+            <Route path='/sql' component={Sql} exact />
+            {/* <Route path='/mangodb' component={MongoDB} exact /> */}
+          </Switch>
         </div>
-        <br />
-        <div className="row">
-          <div className="col-sm-4">
-            <Sidebar />
-          </div>
-            <div className="main-wrapper col-sm-4">
-              <Resources search={search} resources={resources} />
-            </div>
-            <div className="col-sm-4">
-            <Form receiver={this.getResourceItem} />
-          </div> 
-        </div>
-      </div>
+      </Router>
     );
   }
 }

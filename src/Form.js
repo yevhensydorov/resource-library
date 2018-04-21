@@ -36,6 +36,7 @@ class Form extends React.Component {
 			this.state.inputUrl !== ''
 		) {
 			this.setState({
+				submitted: true,
 				validInput: true,
 				inputTitle: '',
 				inputDescription: '',
@@ -113,6 +114,7 @@ class Form extends React.Component {
 								placeholder=' Inter your URL...'
 							/>
 						</div>
+						{this.state.submitted ? <p style={{ color: 'red' }}>THANK YOU ! Your resource has been added</p> : null}
 						<button type='submit'>Submit</button>
 						<p className={this.state.validInput !== false ? 'hidden' : 'validation-error'}>
 							Please fill out inputs
