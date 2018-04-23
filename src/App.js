@@ -1,7 +1,7 @@
-import React from 'react';
-import Form from './Form';
-import Resources from './Resources';
-import Search from './Search';
+import React from "react";
+import Form from "./Form";
+import Resources from "./Resources";
+import Search from "./Search";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,21 +11,23 @@ class App extends React.Component {
       resources: [],
       isFetched: false,
       isLoading: false,
-      search: '',
-      error: null
+      search: "",
+      error: null,
+      test: false,
+      select: 'popular'
     };
-
+    this.handleOpen = this.handleOpen.bind(this);
     this.getResourceItem = this.getResourceItem.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
-    fetch('/api/resources')
+    fetch("/api/resources")
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
-          throw new Error('HTTP error');
+          throw new Error("HTTP error");
         }
       })
       .then(res => res.json())
@@ -57,8 +59,15 @@ class App extends React.Component {
     event.preventDefault();
   }
 
+  handleOpen(state,select) {
+    this.setState({
+      test: state,
+      select:select
+    });
+  }
   render() {
-    const { search, resources } = this.state;
+    const { search, resources, select } = this.state;
+    console.log(select);
     return (
       <div>
         <div className="header row col-sm-12">
@@ -66,7 +75,14 @@ class App extends React.Component {
             <h1>Resource Library</h1>
           </div>
           <div className="col-sm-4 pull-right">
-            <Search search={search} handleSearch={this.handleSearch} handleSubmit={this.handleSubmit} />
+            <Search
+              search={search}
+              select={select}
+              handleSearch={this.handleSearch}
+              handleSubmit={this.handleSubmit}
+              handleOpen={this.handleOpen}
+
+            />
           </div>
         </div>
         <br />
@@ -76,7 +92,9 @@ class App extends React.Component {
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              <Resources search={search} resources={resources} />
+              {(this.state.test && this.state.select  )? (
+                <Resources selected={select} search={search} resources={resources} />
+              ):<Resources  search={search} resources={resources} />}
             </div>
           </section>
         </div>
