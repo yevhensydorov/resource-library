@@ -14,7 +14,7 @@ class App extends React.Component {
       search: "",
       error: null,
       test: false,
-      select: 'popular'
+      select: "popular"
     };
     this.handleOpen = this.handleOpen.bind(this);
     this.getResourceItem = this.getResourceItem.bind(this);
@@ -59,15 +59,14 @@ class App extends React.Component {
     event.preventDefault();
   }
 
-  handleOpen(state,select) {
+  handleOpen(state, select) {
     this.setState({
       test: state,
-      select:select
+      select: select
     });
   }
   render() {
     const { search, resources, select } = this.state;
-    console.log(select);
     return (
       <div>
         <div className="header row col-sm-12">
@@ -81,7 +80,6 @@ class App extends React.Component {
               handleSearch={this.handleSearch}
               handleSubmit={this.handleSubmit}
               handleOpen={this.handleOpen}
-
             />
           </div>
         </div>
@@ -92,9 +90,19 @@ class App extends React.Component {
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              {(this.state.test && this.state.select  )? (
-                <Resources selected={select} search={search} resources={resources} />
-              ):<Resources  search={search} resources={resources} />}
+              {this.state.test && this.state.select ? (
+                <Resources
+                  selected={select}
+                  search={search}
+                  resources={resources}
+                />
+              ) : (
+                <Resources
+                  selected={select}
+                  search={search}
+                  resources={resources}
+                />
+              )}
             </div>
           </section>
         </div>
