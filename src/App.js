@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "./Form";
 import Resources from "./Resources";
+import ResourcesSortedAtoZ from "./ResourcesSortedAtoZ";
 import Search from "./Search";
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
       isLoading: false,
       search: "",
       error: null,
-      test: false,
+      opened: false,
       select: "popular"
     };
     this.handleOpen = this.handleOpen.bind(this);
@@ -61,12 +62,25 @@ class App extends React.Component {
 
   handleOpen(state, select) {
     this.setState({
-      test: state,
+      opened: state,
       select: select
     });
   }
   render() {
-    const { search, resources, select } = this.state;
+    const { search, resources, select, opened } = this.state;
+    const isSelected = opened && (select === "alphabetical") ? (
+      <ResourcesSortedAtoZ
+        selected={select}
+        search={search}
+        resources={resources}
+      />
+    ) : (
+      <Resources
+        selected={select}
+        search={search}
+        resources={resources}
+      />
+    )
     return (
       <div>
         <div className="header row col-sm-12">
@@ -90,19 +104,7 @@ class App extends React.Component {
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              {this.state.test && this.state.select ? (
-                <Resources
-                  selected={select}
-                  search={search}
-                  resources={resources}
-                />
-              ) : (
-                <Resources
-                  selected={select}
-                  search={search}
-                  resources={resources}
-                />
-              )}
+              {isSelected}
             </div>
           </section>
         </div>
