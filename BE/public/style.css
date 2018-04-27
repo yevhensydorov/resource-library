@@ -179,6 +179,10 @@ button[type=submit]:hover {
 }
 
 @media screen and (max-width: 600px) {
+  body {
+    padding-right: 15px;
+    padding-left: 15px; 
+  }
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;

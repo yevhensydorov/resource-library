@@ -40,7 +40,8 @@ class Form extends React.Component {
 				validInput: true,
 				inputTitle: '',
 				inputDescription: '',
-				inputUrl: ''
+				inputUrl: '',
+				resourceType: ''
 			});
 
 			const resourceItem = {
@@ -90,6 +91,15 @@ class Form extends React.Component {
 								placeholder=' Type your title...'
 
 							/>
+						</div>
+						<div>
+							<label htmlFor="resourceType">Type of Resource</label>
+							<select name="type of resource">
+								<option value={this.state.resourceType} onChange={this.handleChange}>select</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Video</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Blog</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Video and Blog</option>
+							</select>
 						</div>
 						<div>
 							<label htmlFor="inputTitle">Resource Description</label>
