@@ -20,6 +20,7 @@ class Resources extends React.Component {
           description={resourceInfo.description}
           url={resourceInfo.url}
           numberOfVotes={resourceInfo.num_of_votes}
+          category={resourceInfo.category_name}
         />
       ));
 

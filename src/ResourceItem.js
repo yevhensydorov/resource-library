@@ -21,30 +21,36 @@ class ResourceItem extends Component {
     const votes = {
       id: this.props.id,
       votes: newLikesNumber
-    }
-    fetch('api/add-vote', {
-      method: 'POST',
+    };
+    fetch("api/add-vote", {
+      method: "POST",
       body: JSON.stringify(votes),
       headers: { "Content-Type": "application/json" }
     })
       .then(response => response.json())
       .catch(err => {
-        this.setState({ error: err })
-      })
+        this.setState({ error: err });
+      });
   }
 
   render() {
     const label = this.state.liked ? (
       <i className="fa fa-heart fa-2x red-heart" />
     ) : (
-        <i className="fa fa-heart fa-2x" />
-      );
-    const { title, description, url } = this.props;
+      <i className="fa fa-heart fa-2x" />
+    );
+    const { title, description, url, category } = this.props;
     return (
       <article className="resource-item">
         <div className="row">
           <a href={url}>
             <h3>{title}</h3>
+          </a>
+        </div>
+        <div className="row">
+          <span className="category-label">Category: </span>
+          <a className="category-link" href="#">
+            {category}
           </a>
         </div>
         <div className="row">
