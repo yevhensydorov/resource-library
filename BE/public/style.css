@@ -173,3 +173,7 @@ button[type=search] {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.drop-down{
+  width:73%
+}

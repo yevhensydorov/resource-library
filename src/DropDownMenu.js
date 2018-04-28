@@ -7,7 +7,7 @@ export default class DropDownMenu extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      dropdownOpen: false,
+      dropdownOpen: false
     };
   }
 
@@ -18,18 +18,19 @@ export default class DropDownMenu extends React.Component {
   }
 
   handleClick(e) {
-    this.setState({
-      select: e.target.value
-    },
-    this.props.open(true, e.target.value));
-
+    this.setState(
+      {
+        select: e.target.value
+      },
+      this.props.open(true, e.target.value)
+    );
   }
 
   render() {
     let message = "You selected " + this.props.select;
     return (
       <div>
-        <select value={this.props.select} onChange={this.handleClick}>
+        <select className="drop-down" value={this.props.select} onChange={this.handleClick}>
           <option value="popular">popular</option>
           <option value="alphabetical">Alphabetical</option>
         </select>
