@@ -4,12 +4,12 @@ import Header from '../Header';
 class Html extends React.Component {
     render() {
         return (
-                <div className="col-sm-12">
-                <div className="header">                
+            <div className="col-sm-12">
+                <div className="header">
                     <Header />
-                    </div>
+                </div>
                 <br />
-               
+
             </div>
         );
     }
