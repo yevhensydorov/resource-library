@@ -3,12 +3,14 @@ import ResourceItem from "./ResourceItem";
 
 class Resources1 extends React.Component {
   render() {
-    const { resources, search, } = this.props;
+    const { resources, search } = this.props;
     let query = search.toLowerCase();
-        let sorted = resources.sort(function(a, b) {
-          if (a.title < b.title) return -1;
-          if (a.title > b.title) return 1;
-          return 0})
+    let sorted = resources
+      .sort(function(a, b) {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+        return 0;
+      })
       .filter(
         ({ title, description }) =>
           title.toLowerCase().includes(query) ||
