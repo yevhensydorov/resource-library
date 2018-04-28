@@ -36,7 +36,6 @@ class App extends React.Component {
       })
       .then(res => res.json())
       .then(data => {
-        // console.log("data from resources", data);
         this.setState({
           resources: data
         });
