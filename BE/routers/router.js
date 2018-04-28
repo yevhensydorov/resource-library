@@ -22,13 +22,18 @@ const db = pgp(connection);
 router.get("/resources", (req, res) => {
   db
     .any(
-      `SELECT resources.id, resources.title, resources.description, resources.url, resources.num_of_votes, categories.category_name
-        FROM resources_categories
-        JOIN resources ON resources.id = resources_categories.resource_id
-        JOIN categories ON categories.id = resources_categories.category_id`
+      `SELECT * FROM resources`
     )
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
+});
+
+router.get('/categories-and-resource-id', (req, res) => {
+  db.any(`SELECT resources_categories.resource_id, categories.id, categories.category_name
+  FROM resources_categories
+  JOIN categories ON categories.id = resources_categories.category_id`)
+  .then(data => res.json(data))
+  .catch(error => res.json({ error: error.message }));
 });
 
 router.post("/resources", (req, res) => {

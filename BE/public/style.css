@@ -189,3 +189,7 @@ button[type="search"] {
   font-weight: bold;
   margin-right: 0.2rem;
 }
+
+.category-link {
+  margin-right: 0.4rem;
+}
