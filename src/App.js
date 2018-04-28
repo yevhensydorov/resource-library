@@ -14,7 +14,7 @@ class App extends React.Component {
       isLoading: false,
       search: "",
       error: null,
-      opened: false,
+      isToggling: false,
       select: "popular"
     };
     this.handleOpen = this.handleOpen.bind(this);
@@ -62,13 +62,13 @@ class App extends React.Component {
 
   handleOpen(state, select) {
     this.setState({
-      opened: state,
+      isToggling: state,
       select: select
     });
   }
   render() {
-    const { search, resources, select, opened } = this.state;
-    const isSelected = opened && (select === "alphabetical") ? (
+    const { search, resources, select, isToggling } = this.state;
+    const selectedComponent = isToggling && (select === "alphabetical") ? (
       <ResourcesSortedAtoZ
         selected={select}
         search={search}
@@ -104,7 +104,7 @@ class App extends React.Component {
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              {isSelected}
+              {selectedComponent}
             </div>
           </section>
         </div>
