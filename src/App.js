@@ -1,7 +1,7 @@
-import React from 'react';
-import Form from './Form';
-import Resources from './Resources';
-import Search from './Search';
+import React from "react";
+import Form from "./Form";
+import Resources from "./Resources";
+import Search from "./Search";
 
 class App extends React.Component {
   constructor(props) {
@@ -9,9 +9,10 @@ class App extends React.Component {
 
     this.state = {
       resources: [],
+      categories: [],
       isFetched: false,
       isLoading: false,
-      search: '',
+      search: "",
       error: null
     };
 
@@ -20,18 +21,45 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/resources')
+    this.getResources();
+    this.getCategoriesAndResourceId();
+  }
+
+  getResources() {
+    fetch("/api/resources")
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
-          throw new Error('HTTP error');
+          throw new Error("HTTP error");
         }
       })
       .then(res => res.json())
       .then(data => {
         this.setState({
           resources: data
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
+
+  getCategoriesAndResourceId() {
+    fetch("/api/categories-and-resource-id")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          categories: data
         });
       })
       .catch(err => {
@@ -58,7 +86,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { search, resources } = this.state;
+    const { search, resources, categories } = this.state;
     return (
       <div>
         <div className="header row col-sm-12">
@@ -66,7 +94,11 @@ class App extends React.Component {
             <h1>Resource Library</h1>
           </div>
           <div className="col-sm-4 pull-right">
-            <Search search={search} handleSearch={this.handleSearch} handleSubmit={this.handleSubmit} />
+            <Search
+              search={search}
+              handleSearch={this.handleSearch}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </div>
         <br />
@@ -76,7 +108,11 @@ class App extends React.Component {
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              <Resources search={search} resources={resources} />
+              <Resources
+                search={search}
+                resources={resources}
+                categories={categories}
+              />
             </div>
           </section>
         </div>
