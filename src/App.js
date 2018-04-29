@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "./Form";
 import Resources from "./Resources";
-import ResourcesSortedAtoZ from "./ResourcesSortedAtoZ";
 import Search from "./Search";
 
 class App extends React.Component {
@@ -68,19 +67,14 @@ class App extends React.Component {
   }
   render() {
     const { search, resources, select, isToggling } = this.state;
-    const selectedComponent = isToggling && (select === "alphabetical") ? (
-      <ResourcesSortedAtoZ
-        selected={select}
-        search={search}
-        resources={resources}
-      />
-    ) : (
-      <Resources
-        selected={select}
-        search={search}
-        resources={resources}
-      />
-    )
+    const sortFunction =
+      isToggling && select === "alphabetical"
+        ? (a, b) => {
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
+            return 0;
+          }
+        : (a, b) => b.num_of_votes - a.num_of_votes;
     return (
       <div>
         <div className="header row col-sm-12">
@@ -104,7 +98,12 @@ class App extends React.Component {
           </div>
           <section className="main-wrapper col-sm-8">
             <div>
-              {selectedComponent}
+              <Resources
+                selected={select}
+                search={search}
+                resources={resources}
+                sortFunction={sortFunction}
+              />
             </div>
           </section>
         </div>

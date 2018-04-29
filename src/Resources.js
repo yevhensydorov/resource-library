@@ -3,10 +3,10 @@ import ResourceItem from "./ResourceItem";
 
 class Resources extends React.Component {
   render() {
-    const { resources, search } = this.props;
+    const { resources, search, sortFunction } = this.props;
     let query = search.toLowerCase();
     let sorted = resources
-      .sort((a, b) => b.num_of_votes - a.num_of_votes)
+      .sort(sortFunction)
       .filter(
         ({ title, description }) =>
           title.toLowerCase().includes(query) ||
