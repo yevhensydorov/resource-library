@@ -59,11 +59,12 @@ export default class Header extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    SQL
+                <Link to="sql">SQL</Link>
+                  
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    MangoBD
+                <Link to="mangodb">MangoDB</Link>                    
                   </DropdownItem>
 
                 </DropdownMenu>
