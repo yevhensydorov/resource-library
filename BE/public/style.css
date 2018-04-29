@@ -114,6 +114,15 @@ h2.navbarBrand {
   justify-content: space-between;
 }
 
+.category-label {
+  font-weight: bold;
+  margin-right: 0.2rem;
+}
+
+.category-link {
+  margin-right: 0.4rem;
+}
+
 /* form  */
 
 input[type=text], select {
@@ -169,6 +178,8 @@ button[type=submit]:hover {
   left: 18px;
   font-size: 19px;
 }
+
+
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}

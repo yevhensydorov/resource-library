@@ -10,6 +10,7 @@ class Home extends React.Component {
 
         this.state = {
             resources: [],
+            categories: [], 
             isFetched: false,
             isLoading: false,
             search: '',
@@ -20,27 +21,54 @@ class Home extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
     }
 
-    componentDidMount() {
-        fetch('/api/resources')
-            .then(res => {
-                if (res.status >= 200 && res.status < 300) {
-                    return res;
-                } else {
-                    throw new Error('HTTP error');
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    resources: data
-                });
-            })
-            .catch(err => {
-                this.setState({
-                    error: err.toString()
-                });
-            });
-    }
+  componentDidMount() {
+    this.getResources();
+    this.getCategoriesAndResourceId();
+  }
+
+  getResources() {
+    fetch("/api/resources")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          resources: data
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
+
+  getCategoriesAndResourceId() {
+    fetch("/api/categories-and-resource-id")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          categories: data
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
 
     getResourceItem(resourceItem) {
         this.setState({
@@ -59,7 +87,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { search, resources } = this.state;
+        const { search, resources, categories } = this.state;
         return (
                 <div className="col-sm-12">
                 <div className="header">                
@@ -76,7 +104,7 @@ class Home extends React.Component {
                                 <Search search={search} handleSearch={this.handleSearch} handleSubmit={this.handleSubmit} />
                             </div>
                             <div className='col-sm-12' >
-                                <Resources search={search} resources={resources} />
+                                <Resources search={search} resources={resources} categories={categories} />
                             </div>
                         </div>
                     </div>
