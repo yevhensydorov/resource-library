@@ -95,7 +95,7 @@ class Form extends React.Component {
 						<div>
 							<label htmlFor="resourceType">Type of Resource</label>
 							<select name="type of resource">
-								<option value={this.state.resourceType} onChange={this.handleChange}>select</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Select</option>
 								<option value={this.state.resourceType} onChange={this.handleChange}>Video</option>
 								<option value={this.state.resourceType} onChange={this.handleChange}>Blog</option>
 								<option value={this.state.resourceType} onChange={this.handleChange}>Video and Blog</option>
