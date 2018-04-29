@@ -36,7 +36,12 @@ class Form extends React.Component {
 			this.state.inputUrl !== ''
 		) {
 			this.setState({
-				validInput: true
+				submitted: true,
+				validInput: true,
+				inputTitle: '',
+				inputDescription: '',
+				inputUrl: '',
+				resourceType: ''
 			});
 
 			const resourceItem = {
@@ -62,7 +67,7 @@ class Form extends React.Component {
 				});  // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
 		} else {
 			this.setState({
-				validInput: false
+				validInput: false,
 			});
 		}
 	}
@@ -88,6 +93,15 @@ class Form extends React.Component {
 							/>
 						</div>
 						<div>
+							<label htmlFor="resourceType">Type of Resource</label>
+							<select name="type of resource">
+								<option value={this.state.resourceType} onChange={this.handleChange}>Select</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Video</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Blog</option>
+								<option value={this.state.resourceType} onChange={this.handleChange}>Video and Blog</option>
+							</select>
+						</div>
+						<div>
 							<label htmlFor="inputTitle">Resource Description</label>
 							<input
 								type="text"
@@ -110,6 +124,7 @@ class Form extends React.Component {
 								placeholder=' Inter your URL...'
 							/>
 						</div>
+						{this.state.submitted ? <p style={{ color: 'red' }}>THANK YOU ! Your resource has been added</p> : null}
 						<button type='submit'>Submit</button>
 						<p className={this.state.validInput !== false ? 'hidden' : 'validation-error'}>
 							Please fill out inputs
@@ -122,7 +137,5 @@ class Form extends React.Component {
 		);
 	};
 };
-
-
 
 export default Form;
