@@ -1,25 +1,27 @@
-import React from 'react';
-import Form from '../Form';
-import Resources from '../Resources';
-import Search from '../Search';
-import Header from '../Header';
+import React from "react";
+import Form from "../Form";
+import Resources from "../Resources";
+import Search from "../Search";
+import Header from "../Header";
+import ResourcesSortedAtoZ from "../ResourcesSortedAtoZ";
 
 class Home extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            resources: [],
-            categories: [], 
-            isFetched: false,
-            isLoading: false,
-            search: '',
-            error: null
-        };
-
-        this.getResourceItem = this.getResourceItem.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
-    }
+    this.state = {
+      resources: [],
+      categories: [],
+      isFetched: false,
+      isLoading: false,
+      search: "",
+      error: null,
+      select: "popular"
+    };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.getResourceItem = this.getResourceItem.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
 
   componentDidMount() {
     this.getResources();
@@ -70,48 +72,74 @@ class Home extends React.Component {
       });
   }
 
-    getResourceItem(resourceItem) {
-        this.setState({
-            resources: this.state.resources.concat(resourceItem)
-        });
-    }
+  getResourceItem(resourceItem) {
+    this.setState({
+      resources: this.state.resources.concat(resourceItem)
+    });
+  }
 
-    handleSearch(event) {
-        this.setState({
-            search: event.target.value
-        });
-    }
+  handleSearch(event) {
+    this.setState({
+      search: event.target.value
+    });
+  }
 
-    handleSubmit(event) {
-        event.preventDefault();
-    }
+  handleSubmit(event) {
+    event.preventDefault();
+  }
 
-    render() {
-        const { search, resources, categories } = this.state;
-        return (
-                <div className="col-sm-12">
-                <div className="header">                
-                    <Header />
-                    </div>
-                <br />
-                <div className="row">
-                    <div className="col-sm-4">
-                        <Form receiver={this.getResourceItem} />
-                    </div>
-                    <div className="main-wrapper col-sm-8">
-                        <div className="row">
-                            <div className='col-sm-12' >
-                                <Search search={search} handleSearch={this.handleSearch} handleSubmit={this.handleSubmit} />
-                            </div>
-                            <div className='col-sm-12' >
-                                <Resources search={search} resources={resources} categories={categories} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  handleOpen(state, select) {
+    this.setState({
+      isToggling: state,
+      select: select
+    });
+  }
+  render() {
+    const { search, resources, categories, select, isToggling } = this.state;
+    const sort =
+      isToggling && select === "alphabetical" ? (
+        <ResourcesSortedAtoZ
+          selected={select}
+          search={search}
+          resources={resources}
+          categories={categories}
+        />
+      ) : (
+        <Resources
+          selected={select}
+          search={search}
+          resources={resources}
+          categories={categories}
+        />
+      );
+    return (
+      <div className="col-sm-12">
+        <div className="header">
+          <Header />
+        </div>
+        <br />
+        <div className="row">
+          <div className="col-sm-4">
+            <Form receiver={this.getResourceItem} />
+          </div>
+          <div className="main-wrapper col-sm-8">
+            <div className="row">
+              <div className="col-sm-12">
+                <Search
+                  select={select}
+                  search={search}
+                  handleSearch={this.handleSearch}
+                  handleSubmit={this.handleSubmit}
+                  handleOpen={this.handleOpen}
+                />
+              </div>
+              <div className="col-sm-12">{sort}</div>
             </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Home;
