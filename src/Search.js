@@ -5,13 +5,14 @@ class Search extends React.Component {
     return (
       <form className="search-form" onSubmit={this.props.handleSubmit}>
         <div>
+          <span><i className="fa fa-search"></i></span>
           <input
             type="search"
             value={this.props.search}
             onChange={this.props.handleSearch}
-            name="resourceSearch"
-            placeholder="Search for resouces... &#xf002;"
-            size="30"
+            name='resourceSearch'
+            placeholder='Search for resouces...'
+            size='30'
           />
         </div>
         <DropDownMenu
@@ -21,5 +22,4 @@ class Search extends React.Component {
     );
   }
 }
-
 export default Search;
