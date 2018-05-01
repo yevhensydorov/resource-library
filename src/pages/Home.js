@@ -3,7 +3,6 @@ import Form from "../Form";
 import Resources from "../Resources";
 import Search from "../Search";
 import Header from "../Header";
-import ResourcesSortedAtoZ from "../ResourcesSortedAtoZ";
 
 class Home extends React.Component {
   constructor(props) {
@@ -96,22 +95,14 @@ class Home extends React.Component {
   }
   render() {
     const { search, resources, categories, select, isToggling } = this.state;
-    const sort =
-      isToggling && select === "alphabetical" ? (
-        <ResourcesSortedAtoZ
-          selected={select}
-          search={search}
-          resources={resources}
-          categories={categories}
-        />
-      ) : (
-        <Resources
-          selected={select}
-          search={search}
-          resources={resources}
-          categories={categories}
-        />
-      );
+    const sortFunction =
+      isToggling && select === "alphabetical"
+        ? (a, b) => {
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
+            return 0;
+          }
+        : (a, b) => b.num_of_votes - a.num_of_votes;
     return (
       <div className="col-sm-12">
         <div className="header">
@@ -133,7 +124,15 @@ class Home extends React.Component {
                   handleOpen={this.handleOpen}
                 />
               </div>
-              <div className="col-sm-12">{sort}</div>
+              <div className="col-sm-12">
+                <Resources
+                  selected={select}
+                  search={search}
+                  resources={resources}
+                  categories={categories}
+                  sortFunction={sortFunction}
+                />
+              </div>
             </div>
           </div>
         </div>
