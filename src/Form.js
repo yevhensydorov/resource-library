@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class Form extends React.Component {
 	constructor(props) {
@@ -10,7 +10,8 @@ class Form extends React.Component {
 			inputUrl: '',
 			validInput: 'blank',
 			isResourcesNotSend: false,
-			error: null
+      error: null,
+      initalVote: 0,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -41,13 +42,15 @@ class Form extends React.Component {
 				inputTitle: '',
 				inputDescription: '',
 				inputUrl: '',
-				resourceType: ''
+        resourceType: '',
+        initalVote: 0,
 			});
 
 			const resourceItem = {
 				title: this.state.inputTitle,
 				description: this.state.inputDescription,
-				url: this.state.inputUrl
+        url: this.state.inputUrl,
+        num_of_votes: this.state.initalVote
 			};
 
 			fetch('/api/resources', {
