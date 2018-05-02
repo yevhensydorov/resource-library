@@ -21,27 +21,28 @@ const db = pgp(connection);
 //ROUTES GO HERE
 router.get("/resources", (req, res) => {
   db
+    .any(`SELECT * FROM resources`)
+    .then(data => res.json(data))
+    .catch(error => res.json({ error: error.message }));
+});
+
+router.get("/categories-and-resource-id", (req, res) => {
+  db
     .any(
-      `SELECT * FROM resources`
+      `SELECT resources_categories.resource_id, categories.id, categories.category_name
+  FROM resources_categories
+  JOIN categories ON categories.id = resources_categories.category_id`
     )
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });
 
-router.get('/categories-and-resource-id', (req, res) => {
-  db.any(`SELECT resources_categories.resource_id, categories.id, categories.category_name
-  FROM resources_categories
-  JOIN categories ON categories.id = resources_categories.category_id`)
-  .then(data => res.json(data))
-  .catch(error => res.json({ error: error.message }));
-});
-
 router.post("/resources", (req, res) => {
-  const { title, description, url } = req.body;
+  const { title, description, url, votes, resourceType } = req.body;
   db
     .any(
-      `INSERT INTO resources (title, description, url) VALUES($1, $2, $3) RETURNING id`,
-      [title, description, url]
+      `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING id`,
+      [title, description, url, votes, resourceType]
     )
     .then(data => {
       res.json(Object.assign({}, { id: data.id }, req.body));
@@ -79,7 +80,5 @@ router.get("/categories/:categoryName", (req, res) => {
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });
-
-
 
 module.exports = router;
