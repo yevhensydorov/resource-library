@@ -45,7 +45,14 @@ class ResourceItem extends Component {
     ) : (
       <i className="fa fa-heart fa-2x" />
     );
-    const { id, title, description, url, categories } = this.props;
+    const {
+      id,
+      title,
+      description,
+      url,
+      categories,
+      resourceType
+    } = this.props;
     let categoriesArr = [];
     categories.map(category => {
       if (id === category.resource_id) {
@@ -69,6 +76,10 @@ class ResourceItem extends Component {
         <div className="row">
           <span className="category-label">Category: </span>
           {categoriesToDisplay}
+        </div>
+        <div className="row">
+          <span className="category-label">Type: </span>
+          {resourceType}
         </div>
         <div className="row">
           <p>{description}</p>

@@ -8,14 +8,14 @@
 }
 .navbar-light .navbar-nav .nav-link:hover {
   color: greenyellow;
-  background:white;
+  background: white;
   border-radius: 6px;
   text-decoration: none;
 }
 
 .nav-item.navItem :hover {
   color: greenyellow;
-  background:white;
+  background: white;
   border-radius: 6px;
   text-decoration: none;
 }
@@ -53,7 +53,7 @@ a.titles:hover {
   background: rgb(254, 255, 254);
 }
 h5 {
-  padding-left:10px;
+  padding-left: 10px;
 }
 .material-icons {
   font-size: 77px;
@@ -71,7 +71,7 @@ h5 {
 .result-img {
   display: inline-block;
   padding: 5px;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   margin-right: 20px;
   vertical-align: top;
 }
@@ -100,7 +100,6 @@ h5 {
 h2.navbarBrand {
   color: white;
   padding-top: 0px;
-
 }
 .resources h2 {
   text-align: center;
@@ -125,7 +124,9 @@ h2.navbarBrand {
 
 /* form  */
 
-input[type=text], select {
+input[type="text"],
+select,
+.descriptionText {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -135,9 +136,9 @@ input[type=text], select {
   box-sizing: border-box;
 }
 
-button[type=submit] {
+button[type="submit"] {
   width: 100%;
-  background-color:#2196F3;
+  background-color: #2196f3;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -145,10 +146,10 @@ button[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
-.search-form{
+.search-form {
   padding-top: 2px;
 }
-input[type=search] {
+input[type="search"] {
   font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
   width: 100%;
   padding: 12px 20px;
@@ -159,9 +160,8 @@ input[type=search] {
   border-radius: 5px;
 }
 
-button[type=submit]:hover {
+button[type="submit"]:hover {
   background-color: blue;
-
 }
 
 .form {
@@ -170,8 +170,12 @@ button[type=submit]:hover {
   padding: 20px;
 }
 
-.search { position: relative; }
-.search input { text-indent: 40px;}
+.search {
+  position: relative;
+}
+.search input {
+  text-indent: 40px;
+}
 .search .fa-search {
   position: absolute;
   top: 24px;
@@ -179,10 +183,10 @@ button[type=submit]:hover {
   font-size: 19px;
 }
 
-
-
 @media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
+  .topnav a:not(:first-child) {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
@@ -194,7 +198,9 @@ button[type=submit]:hover {
     padding-right: 15px;
     padding-left: 15px;
   }
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -206,4 +212,3 @@ button[type=submit]:hover {
     text-align: left;
   }
 }
-
