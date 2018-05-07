@@ -11,6 +11,12 @@ class ResourceItem extends Component {
     this.handleUpVote = this.handleUpVote.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      likes: newProps.numberOfVotes
+    });
+  }
+
   handleUpVote() {
     const { likes, liked } = this.state;
     const newLikesNumber = liked ? likes - 1 : likes + 1;
@@ -21,25 +27,32 @@ class ResourceItem extends Component {
     const votes = {
       id: this.props.id,
       votes: newLikesNumber
-    }
-    fetch('api/add-vote', {
-      method: 'POST',
+    };
+    fetch("api/add-vote", {
+      method: "POST",
       body: JSON.stringify(votes),
       headers: { "Content-Type": "application/json" }
     })
       .then(response => response.json())
       .catch(err => {
-        this.setState({ error: err })
-      })
+        this.setState({ error: err });
+      });
   }
 
   render() {
     const label = this.state.liked ? (
       <i className="fa fa-heart fa-2x red-heart" />
     ) : (
-        <i className="fa fa-heart fa-2x" />
-      );
-    const { id, title, description, url, categories } = this.props;
+      <i className="fa fa-heart fa-2x" />
+    );
+    const {
+      id,
+      title,
+      description,
+      url,
+      categories,
+      resourceType
+    } = this.props;
     let categoriesArr = [];
     categories.map(category => {
       if (id === category.resource_id) {
@@ -56,13 +69,17 @@ class ResourceItem extends Component {
     return (
       <article className="resource-item">
         <div className="row">
-          <a className='titles' href={url}>
+          <a className="titles" href={url}>
             <h3>{title}</h3>
           </a>
         </div>
         <div className="row">
           <span className="category-label">Category: </span>
           {categoriesToDisplay}
+        </div>
+        <div className="row">
+          <span className="category-label">Type: </span>
+          {resourceType}
         </div>
         <div className="row">
           <p>{description}</p>
