@@ -26,6 +26,13 @@ router.get("/resources", (req, res) => {
     .catch(error => res.json({ error: error.message }));
 });
 
+router.get("/categories", (req, res) => {
+  db
+    .any(`SELECT category_name FROM categories`)
+    .then(data => res.json(data))
+    .catch(error => res.json({ error: error.message }));
+});
+
 router.get("/categories-and-resource-id", (req, res) => {
   db
     .any(

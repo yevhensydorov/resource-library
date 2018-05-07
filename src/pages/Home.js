@@ -11,6 +11,7 @@ class Home extends React.Component {
     this.state = {
       resources: [],
       categories: [],
+      categoryNames: [],
       isFetched: false,
       isLoading: false,
       search: "",
@@ -25,6 +26,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.getResources();
     this.getCategoriesAndResourceId();
+    this.getCategoryNames();
   }
 
   getResources() {
@@ -71,6 +73,36 @@ class Home extends React.Component {
       });
   }
 
+  getCategoryNames() {
+    fetch("/api/categories")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(catList => {
+        catList.map(cat => {
+          this.setState({
+            categoryNames: [
+              ...this.state.categoryNames,
+              {
+                category_name: cat.category_name,
+                selected: false
+              }
+            ]
+          });
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
+
   getResourceItem(resourceItem) {
     this.setState({
       resources: this.state.resources.concat(resourceItem)
@@ -94,6 +126,11 @@ class Home extends React.Component {
     });
   }
   render() {
+    // const categoriesObj = categoriesList.map(category => {
+    //   return { categoryName: category };
+    // });
+    // console.log(categoriesObj);
+    console.log(this.state);
     const { search, resources, categories, select, isToggling } = this.state;
     const sortFunction =
       isToggling && select === "alphabetical"
