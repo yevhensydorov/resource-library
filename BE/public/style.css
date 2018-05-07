@@ -22,7 +22,7 @@
 .navbar-light .navbar-brand {
   color: white;
   font-size: 27px;
-  font-weight: bold; 
+  font-weight: bold;
 }
 .link {
   color: white;
@@ -169,10 +169,10 @@ button[type=submit]:hover {
   background-color: #f2f2f2;
   padding: 20px;
 }
- 
+
 .search { position: relative; }
 .search input { text-indent: 40px;}
-.search .fa-search { 
+.search .fa-search {
   position: absolute;
   top: 24px;
   left: 18px;
@@ -192,7 +192,7 @@ button[type=submit]:hover {
 @media screen and (max-width: 600px) {
   body {
     padding-right: 15px;
-    padding-left: 15px; 
+    padding-left: 15px;
   }
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {

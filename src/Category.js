@@ -104,7 +104,7 @@ class Category extends React.Component {
           <div className="col-sm-4">
             <Form receiver={this.getResourceItem} />
           </div>
-          <div className="main-wrapper col-sm-8">
+          <div className="main-rapper col-sm-8">
             <div className="row">
               <div className="col-sm-12">
                 <Search
