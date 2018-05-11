@@ -1,10 +1,11 @@
+
 import React from "react";
 import Form from "./Form";
 import Resources from "./Resources";
 import Search from "./Search";
-import Header from './Header';
+import Header from "./Header";
 
-class Category extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,16 +15,17 @@ class Category extends React.Component {
       isFetched: false,
       isLoading: false,
       search: "",
-      error: null
+      error: null,
+      select: "popular"
     };
-
+    this.handleOpen = this.handleOpen.bind(this);
     this.getResourceItem = this.getResourceItem.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
+    this.getResources();
     this.getCategoriesAndResourceId();
-    this.getResources(this.state.category)
   }
   componentDidUpdate (prevProps) {
     if (prevProps.match.params.category !== this.props.match.params.category) {
@@ -34,7 +36,7 @@ class Category extends React.Component {
   }
   getResources() {
     fetch(`/api/categories/${this.props.match.params.category}`)
-    .then(res => {
+      .then(res => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
@@ -92,41 +94,58 @@ class Category extends React.Component {
     event.preventDefault();
   }
 
+  handleOpen(state, select) {
+    this.setState({
+      isToggling: state,
+      select: select
+    });
+  }
   render() {
-    const { search, resources, categories } = this.state;
+    const { search, resources, categories, select, isToggling } = this.state;
+    const sortFunction =
+      isToggling && select === "alphabetical"
+        ? (a, b) => {
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
+            return 0;
+          }
+        : (a, b) => b.num_of_votes - a.num_of_votes;
     return (
       <div className="col-sm-12">
         <div className="header">
-        <Header />
+          <Header />
         </div>
         <br />
         <div className="row">
           <div className="col-sm-4">
             <Form receiver={this.getResourceItem} />
           </div>
-          <div className="main-rapper col-sm-8">
+          <div className="main-wrapper col-sm-8">
             <div className="row">
               <div className="col-sm-12">
                 <Search
+                  select={select}
                   search={search}
                   handleSearch={this.handleSearch}
                   handleSubmit={this.handleSubmit}
+                  handleOpen={this.handleOpen}
                 />
               </div>
               <div className="col-sm-12">
                 <Resources
+                  selected={select}
                   search={search}
                   resources={resources}
                   categories={categories}
+                  sortFunction={sortFunction}
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-
     );
   }
 }
 
-export default Category;
+export default Home;
