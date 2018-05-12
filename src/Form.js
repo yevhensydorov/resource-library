@@ -8,6 +8,7 @@ class Form extends React.Component {
       inputTitle: "",
       inputDescription: "",
       inputUrl: "",
+      categoryNames: [],
       validInput: "blank",
       isResourcesNotSend: false,
       error: null,
@@ -19,8 +20,65 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.getCategoryNames();
+  }
+
+  getCategoryNames() {
+    fetch("/api/categories")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(catList => {
+        catList.map(cat => {
+          this.setState({
+            categoryNames: [
+              ...this.state.categoryNames,
+              {
+                category_name: cat.category_name,
+                selected: false
+              }
+            ]
+          });
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
+
   handleChange(event) {
-    const value = event.target.value;
+    // console.log(event.target.name);
+    const checkboxArr = this.state.categoryNames;
+    // console.log(checkboxArr);
+    if (event.target.type === "checkbox") {
+      checkboxArr.map(item => {
+        if (item.category_name.toLowerCase() === event.target.name) {
+          this.setState({
+            categoryNames: [
+              ...this.state.categoryNames,
+              {
+                category_name: item.category_name,
+                selected: !event.target.checked
+              }
+            ]
+          });
+        }
+        // console.log(item.category_name, event.target.name);
+      });
+    }
+    console.log(checkboxArr);
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
     const name = event.target.name;
 
     this.setState({
@@ -77,6 +135,20 @@ class Form extends React.Component {
   }
 
   render() {
+    // console.log(this.state.categoryNames);
+    let checkboxes = this.state.categoryNames.map((item, i) => {
+      return (
+        <div key={i}>
+          <input
+            type="checkbox"
+            checked={item.selected}
+            onChange={this.handleChange}
+            name={item.category_name.toLowerCase()}
+          />
+          {item.category_name}
+        </div>
+      );
+    });
     return (
       <div className="form">
         <form className="add-form" onSubmit={this.handleSubmit}>
@@ -132,6 +204,7 @@ class Form extends React.Component {
                 placeholder=" Inter your URL..."
               />
             </div>
+            <div>{checkboxes}</div>
             {this.state.submitted ? (
               <p style={{ color: "red" }}>
                 THANK YOU ! Your resource has been added
