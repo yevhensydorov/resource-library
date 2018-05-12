@@ -1,8 +1,8 @@
 import React from "react";
-import Form from "../Form";
-import Resources from "../Resources";
-import Search from "../Search";
-import Header from "../Header";
+import Form from "./Form";
+import Resources from "./Resources";
+import Search from "./Search";
+import Header from "./Header";
 
 class Home extends React.Component {
   constructor(props) {
