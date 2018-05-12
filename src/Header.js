@@ -31,39 +31,27 @@ export default class Header extends React.Component {
     return (
       <div>
         <Navbar light expand="md">
-          <NavbarBrand href="/">Resource Library</NavbarBrand>
+          <NavbarBrand href="/">CYF Library</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="navItem">
-                <Link className="link" to="/">
-                  <i className="fa fa-home home-icon" />
-                </Link>
+                <Link className="link" to="/"><i className="fa fa-home home-icon" /></Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/html">
-                  HTML
-                </Link>
+                <Link className="link" to="/HTML">HTML</Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/css">
-                  CSS
-                </Link>
+                <Link className="link" to="/CSS">CSS</Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/javascript">
-                  JavaScript
-                </Link>
+                <Link className="link" to="/JavaScript">JavaScript</Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/node">
-                  Node
-                </Link>
+                <Link className="link" to="/NodeJS">Node</Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="react">
-                  React
-                </Link>
+                <Link className="link" to="React">React</Link>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle className="toggle" nav caret>

@@ -1,36 +1,25 @@
-import React from 'react';
-import Home from "./pages/Home.js"
-import Html from "./pages/Html.js"
-import Css from "./pages/Css.js"
-import JavaScript from "./pages/JavaScript.js"
-import Nodejs from "./pages/Node.js"
-import Reactjs from "./pages/React.js"
-import Sql from "./pages/Sql.js"
-import MangoDB from "./pages/MangoDB.js"
+import React, { Component } from "react";
+import Category from "./Category";
+import Home from "./Home";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-export default class App extends React.Component {
-
-// class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { resources: [] };
+  }
   render() {
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
+        <Router>
           <Switch>
-            <Route path='/' component={Home} exact />
-            <Route path='/html' component={Html} exact />
-            <Route path='/css' component={Css} exact />
-            <Route path='/javascript' component={JavaScript} exact />
-            <Route path='/node' component={Nodejs} exact />
-            <Route path='/react' component={Reactjs} exact />
-            <Route path='/mangodb' component={MangoDB} exact />
-            <Route path='/sql' component={Sql} exact />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:category" component={Category} />
           </Switch>
-        </div>
-      </Router>
+        </Router>
+      </div>
     );
   }
 }
 
-// export default App;
+export default App;
