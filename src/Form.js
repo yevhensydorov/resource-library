@@ -133,7 +133,7 @@ class Form extends React.Component {
               />
             </div>
             {this.state.submitted ? (
-              <p style={{ color: "red" }}>
+              <p style={{ color: "green" }}>
                 THANK YOU ! Your resource has been added
               </p>
             ) : null}

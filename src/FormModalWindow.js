@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "./Form";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 
 class ModalExample extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class ModalExample extends React.Component {
 
   render() {
     return (
-      <div className="myModal">
+      <div className="modalBtn">
         <Button color="success" onClick={this.toggle}>
           UPLOAD-RESOURCE
         </Button>
@@ -29,14 +29,15 @@ class ModalExample extends React.Component {
           toggle={this.toggle}
           className={this.props.modal}
         >
+          <ModalHeader toggle={this.toggle} />
           <ModalBody>
-            <Form />
+            <Form receiver={this.props.receiverHeader} />
           </ModalBody>
-          <ModalFooter>
+          {/* <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>
               Cancel
             </Button>
-          </ModalFooter>
+          </ModalFooter> */}
         </Modal>
       </div>
     );
