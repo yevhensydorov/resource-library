@@ -61,20 +61,21 @@ class Form extends React.Component {
     if (event.target.type === "checkbox") {
       checkboxArr.map(item => {
         if (item.category_name.toLowerCase() === event.target.name) {
-          this.setState({
-            categoryNames: [
-              ...this.state.categoryNames,
-              {
-                category_name: item.category_name,
-                selected: !event.target.checked
-              }
-            ]
-          });
+          console.log(item);
+          // this.setState({
+          //   categoryNames: [
+          //     ...this.state.categoryNames,
+          //     {
+          //       category_name: item.category_name,
+          //       selected: !event.target.checked
+          //     }
+          //   ]
+          // });
         }
         // console.log(item.category_name, event.target.name);
       });
     }
-    console.log(checkboxArr);
+    // console.log(checkboxArr);
     const value =
       event.target.type === "checkbox"
         ? event.target.checked
