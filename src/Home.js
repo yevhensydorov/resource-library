@@ -1,9 +1,7 @@
 import React from "react";
-import Form from "./Form";
 import Resources from "./Resources";
 import Search from "./Search";
 import Header from "./Header";
-import FormModalWindow from "./FormModalWindow";
 class Home extends React.Component {
   constructor(props) {
     super(props);
