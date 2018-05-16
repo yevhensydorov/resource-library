@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import FormModalWindow from "./FormModalWindow";
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -36,22 +37,29 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="navItem">
-                <Link className="link" to="/"><i className="fa fa-home home-icon" /></Link>
+                <Link className="link" to="/HTML">
+                  HTML
+                </Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/HTML">HTML</Link>
+                <Link className="link" to="/CSS">
+                  CSS
+                </Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/CSS">CSS</Link>
+                <Link className="link" to="/JavaScript">
+                  JavaScript
+                </Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/JavaScript">JavaScript</Link>
+                <Link className="link" to="/NodeJS">
+                  Node
+                </Link>
               </NavItem>
               <NavItem className="navItem">
-                <Link className="link" to="/NodeJS">Node</Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="React">React</Link>
+                <Link className="link" to="React">
+                  React
+                </Link>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle className="toggle" nav caret>
@@ -68,6 +76,9 @@ export default class Header extends React.Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
+            <div className="text-right">
+              <FormModalWindow receiverHeader={this.props.receiver} />
+            </div>
           </Collapse>
         </Navbar>
       </div>
