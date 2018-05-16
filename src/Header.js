@@ -37,11 +37,6 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="navItem">
-                <Link className="link" to="/">
-                  <i className="fa fa-home home-icon" />
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
                 <Link className="link" to="/HTML">
                   HTML
                 </Link>
@@ -81,9 +76,9 @@ export default class Header extends React.Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-              <div className="formModal text-right">
-                <FormModalWindow receiverHeader={this.props.receiver} />
-              </div>
+            <div className="text-right">
+              <FormModalWindow receiverHeader={this.props.receiver} />
+            </div>
           </Collapse>
         </Navbar>
       </div>

@@ -107,8 +107,8 @@ class Home extends React.Component {
           <Header receiver={this.getResourceItem} />
         </div>
         <br />
-        <div className="row col-md-12">
-          <div className="main-wrapper col-md-8 col-md-push-2">
+        <div className="row col-sm-12">
+          <div className="main-wrapper col-sm-8 col-sm-push-2">
             <div className="row">
               <div className="col-sm-12">
                 <Search

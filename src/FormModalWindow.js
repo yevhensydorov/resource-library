@@ -22,7 +22,7 @@ class ModalExample extends React.Component {
     return (
       <div className="modalBtn">
         <Button color="success" onClick={this.toggle}>
-          UPLOAD-RESOURCE
+          UPLOAD
         </Button>
         <Modal
           isOpen={this.state.modal}
