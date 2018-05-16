@@ -38,11 +38,11 @@ router.get("/categories-and-resource-id", (req, res) => {
 });
 
 router.post("/resources", (req, res) => {
-  const { title, description, url, votes, resourceType } = req.body;
+  const { title, description, url, num_of_votes, resource_type } = req.body;
   db
     .any(
       `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING id`,
-      [title, description, url, votes, resourceType]
+      [title, description, url, num_of_votes, resource_type]
     )
     .then(data => {
       res.json(Object.assign({}, { id: data.id }, req.body));

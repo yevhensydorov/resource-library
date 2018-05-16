@@ -50,8 +50,8 @@ class Form extends React.Component {
         title: this.state.inputTitle,
         description: this.state.inputDescription,
         url: this.state.inputUrl,
-        votes: this.state.initalVote,
-        resourceType: this.state.resourceType
+        num_of_votes: this.state.initalVote,
+        resource_type: this.state.resourceType
       };
 
       fetch("/api/resources", {
