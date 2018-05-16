@@ -24,7 +24,7 @@ export default class DropDownMenu extends React.Component {
           value={this.props.select}
           onChange={this.handleClick}
         >
-          <option value="popular">popular</option>
+          <option value="popular">Popular</option>
           <option value="alphabetical">Alphabetical</option>
         </select>
       </div>
