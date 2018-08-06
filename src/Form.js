@@ -55,35 +55,22 @@ class Form extends React.Component {
   }
 
   handleChange(event) {
-    // console.log(event.target.name);
     const checkboxArr = this.state.categoryNames;
-    // console.log(checkboxArr);
     if (event.target.type === "checkbox") {
       checkboxArr.map(item => {
         if (item.category_name.toLowerCase() === event.target.name) {
-          console.log(item);
-          // this.setState({
-          //   categoryNames: [
-          //     ...this.state.categoryNames,
-          //     {
-          //       category_name: item.category_name,
-          //       selected: !event.target.checked
-          //     }
-          //   ]
-          // });
+          item.selected = !item.selected;
         }
-        // console.log(item.category_name, event.target.name);
       });
     }
-    // console.log(checkboxArr);
     const value =
       event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
     const name = event.target.name;
-
     this.setState({
       [name]: value,
+      categoryNames: checkboxArr,
       validInput: true
     });
   }
@@ -136,13 +123,12 @@ class Form extends React.Component {
   }
 
   render() {
-    // console.log(this.state.categoryNames);
+    // console.log(this.state);
     let checkboxes = this.state.categoryNames.map((item, i) => {
       return (
         <div key={i}>
           <input
             type="checkbox"
-            checked={item.selected}
             onChange={this.handleChange}
             name={item.category_name.toLowerCase()}
           />
