@@ -92,12 +92,21 @@ class Form extends React.Component {
         initalVote: 0
       });
 
+      let resourceCategories = [];
+
+      this.state.categoryNames.map(item => {
+        if (item.selected) {
+          resourceCategories.push(item.category_name);
+        }
+      });
+
       const resourceItem = {
         title: this.state.inputTitle,
         description: this.state.inputDescription,
         url: this.state.inputUrl,
         votes: this.state.initalVote,
-        resourceType: this.state.resourceType
+        resourceType: this.state.resourceType,
+        categories: resourceCategories
       };
 
       fetch("/api/resources", {
