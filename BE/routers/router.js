@@ -45,20 +45,53 @@ router.get("/categories-and-resource-id", (req, res) => {
 });
 
 router.post("/resources", (req, res) => {
+  const resourceCat = req.body.categories;
   const { title, description, url, votes, resourceType } = req.body;
-  db
-    .any(
-      `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING id`,
-      [title, description, url, votes, resourceType]
-    )
-    .then(data => {
-      res.json(Object.assign({}, { id: data.id }, req.body));
-    })
-    .catch(error => {
-      res.json({
-        error: error.message
-      });
-    });
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  // db
+  //   .task(t => {
+  //     return t
+  //       .one(
+  //         `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING id`,
+  //         [title, description, url, votes, resourceType]
+  //       )
+  //       .then(resource => {
+  //         resourceCat.map(item => {
+  //           return t.any(
+  //             `INSERT INTO resources_categories (resource_id, category_id)
+  //               VALUES ($1, (SELECT id
+  //               FROM categories
+  //               WHERE category_name = $2))`,
+  //             [resource.id, item]
+  //           );
+  //         });
+  //       });
+  //   })
+  //   .then(data => {
+  //     res.json(Object.assign({}, { id: data.id }, req.body));
+  //   })
+  //   .catch(error => {
+  //     res.json({
+  //       error: error.message
+  //     });
+  //   });
+  ///////////////////////////////////////////////////////////////////////
+
+  // db
+  //   .any(
+  //     `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING id`,
+  //     [title, description, url, votes, resourceType]
+  //   )
+  // .then(data => {
+  //   res.json(Object.assign({}, { id: data.id }, req.body));
+  // })
+  // .catch(error => {
+  //   res.json({
+  //     error: error.message
+  //   });
+  // });
 });
 
 router.post("/add-vote", (req, res) => {
