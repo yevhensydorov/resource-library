@@ -106,7 +106,7 @@ router.get("/categories/:categoryName", (req, res) => {
   const searchCategory = req.params.categoryName;
   db
     .any(
-      `SELECT resources.id, resources.title, resources.description, resources.url, resources.num_of_votes, categories.category_name
+      `SELECT resources.id, resources.title, resources.description, resources.url, resources.resource_type, resources.num_of_votes, categories.category_name
         FROM resources_categories
         JOIN resources ON resources.id = resources_categories.resource_id
         JOIN categories ON categories.id = resources_categories.category_id

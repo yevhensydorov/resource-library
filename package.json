@@ -10,15 +10,14 @@
     "test:watch": "npm test -- --watch",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "node index.js"
+    "start": "node index.js",
+    "serve": "npm start",
+    "preserve": "npm run build"
   },
   "author": "Eugene",
   "license": "ISC",
   "babel": {
-    "presets": [
-      "babel-preset-react",
-      "babel-preset-env"
-    ],
+    "presets": ["babel-preset-react", "babel-preset-env"],
     "plugins": [
       "transform-es2015-destructuring",
       "transform-object-rest-spread"

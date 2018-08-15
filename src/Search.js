@@ -17,7 +17,12 @@ class Search extends React.Component {
             size="30"
           />
         </div>
-        <DropDownMenu open={this.props.handleOpen} select={this.props.select} />
+        <div className="dropdownFilter">
+          <DropDownMenu
+            open={this.props.handleOpen}
+            select={this.props.select}
+          />
+        </div>
       </form>
     );
   }

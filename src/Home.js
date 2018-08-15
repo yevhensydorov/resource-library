@@ -1,9 +1,7 @@
 import React from "react";
-import Form from "../Form";
-import Resources from "../Resources";
-import Search from "../Search";
-import Header from "../Header";
-
+import Resources from "./Resources";
+import Search from "./Search";
+import Header from "./Header";
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -104,16 +102,13 @@ class Home extends React.Component {
           }
         : (a, b) => b.num_of_votes - a.num_of_votes;
     return (
-      <div className="col-sm-12">
+      <div className="col-md-12">
         <div className="header">
-          <Header />
+          <Header receiver={this.getResourceItem} />
         </div>
         <br />
-        <div className="row">
-          <div className="col-sm-4">
-            <Form receiver={this.getResourceItem} />
-          </div>
-          <div className="main-wrapper col-sm-8">
+        <div className="row col-sm-12">
+          <div className="main-wrapper col-sm-8 col-sm-push-2">
             <div className="row">
               <div className="col-sm-12">
                 <Search
