@@ -94,11 +94,6 @@ class Home extends React.Component {
     });
   }
   render() {
-    // const categoriesObj = categoriesList.map(category => {
-    //   return { categoryName: category };
-    // });
-    // console.log(categoriesObj);
-    // console.log(this.state);
     const { search, resources, categories, select, isToggling } = this.state;
     const sortFunction =
       isToggling && select === "alphabetical"

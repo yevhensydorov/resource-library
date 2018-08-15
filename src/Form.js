@@ -104,8 +104,8 @@ class Form extends React.Component {
         title: this.state.inputTitle,
         description: this.state.inputDescription,
         url: this.state.inputUrl,
-        votes: this.state.initalVote,
-        resourceType: this.state.resourceType,
+        num_of_votes: this.state.initalVote,
+        resource_type: this.state.resourceType,
         categories: resourceCategories
       };
 
@@ -132,7 +132,6 @@ class Form extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
     let checkboxes = this.state.categoryNames.map((item, i) => {
       return (
         <div key={i}>
