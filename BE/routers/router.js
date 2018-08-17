@@ -77,11 +77,16 @@ router.post("/resources", (req, res) => {
                 );
               });
           });
-          return t.batch(queries);
+          return t.batch([
+            {
+              queries: queries
+            },
+            { data: newResource }
+          ]);
         });
     })
     .then(data => {
-      res.json(Object.assign({}, { id: newResource.id }, req.body));
+      res.json(Object.assign({}, { id: data[1].id }, req.body));
     })
     .catch(error => {
       res.json({
