@@ -20,8 +20,18 @@ const db = pgp(connection);
 
 //ROUTES GO HERE
 router.get("/resources", (req, res) => {
+  // TO DO: return resources with categories list instead of just resources info. If so, delete categories-and-resource-id route.
   db
     .any(`SELECT * FROM resources`)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => res.json({ error: error.message }));
+});
+
+router.get("/categories", (req, res) => {
+  db
+    .any(`SELECT category_name FROM categories`)
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });
@@ -38,14 +48,46 @@ router.get("/categories-and-resource-id", (req, res) => {
 });
 
 router.post("/resources", (req, res) => {
+  const resourceCat = req.body.categories;
   const { title, description, url, num_of_votes, resource_type } = req.body;
+  let newResource;
   db
-    .any(
-      `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING id`,
-      [title, description, url, num_of_votes, resource_type]
-    )
+    .tx(t => {
+      return t
+        .one(
+          `INSERT INTO resources (title, description, url, num_of_votes, resource_type) VALUES($1, $2, $3, $4, $5) RETURNING *`,
+          [title, description, url, num_of_votes, resource_type]
+        )
+        .then(resource => {
+          newResource = {
+            id: resource.id,
+            title: resource.title,
+            description: resource.description,
+            url: resource.url,
+            num_of_votes: resource.num_of_votes,
+            resource_type: resource.resource_type,
+            categories: resourceCat
+          };
+          let queries = resourceCat.map(item => {
+            return t
+              .one(`SELECT id FROM categories WHERE category_name = $1`, item)
+              .then(category => {
+                return t.none(
+                  `INSERT INTO resources_categories (resource_id, category_id) VALUES ($1, $2)`,
+                  [resource.id, category.id]
+                );
+              });
+          });
+          return t.batch([
+            {
+              queries: queries
+            },
+            { data: newResource }
+          ]);
+        });
+    })
     .then(data => {
-      res.json(Object.assign({}, { id: data.id }, req.body));
+      res.json(Object.assign({}, { id: data[1].id }, req.body));
     })
     .catch(error => {
       res.json({
@@ -70,7 +112,7 @@ router.get("/categories/:categoryName", (req, res) => {
   const searchCategory = req.params.categoryName;
   db
     .any(
-      `SELECT resources.id, resources.title, resources.description, resources.url, resources.num_of_votes, categories.category_name
+      `SELECT resources.id, resources.title, resources.description, resources.url, resources.resource_type, resources.num_of_votes, categories.category_name
         FROM resources_categories
         JOIN resources ON resources.id = resources_categories.resource_id
         JOIN categories ON categories.id = resources_categories.category_id

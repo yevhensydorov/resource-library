@@ -6,11 +6,7 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavItem
 } from "reactstrap";
 import FormModalWindow from "./FormModalWindow";
 
@@ -61,20 +57,16 @@ export default class Header extends React.Component {
                   React
                 </Link>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle className="toggle" nav caret>
+              <NavItem className="navItem">
+                <Link className="link" to="/Database">
                   Database
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <Link to="sql">SQL</Link>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    <Link to="mangodb">MangoDB</Link>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+                </Link>
+              </NavItem>
+              <NavItem className="navItem">
+                <Link className="link" to="/Project-Management">
+                  Project-Management
+                </Link>
+              </NavItem>
             </Nav>
             <div className="text-right">
               <FormModalWindow receiverHeader={this.props.receiver} />

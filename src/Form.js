@@ -8,6 +8,7 @@ class Form extends React.Component {
       inputTitle: "",
       inputDescription: "",
       inputUrl: "",
+      categoryNames: [],
       validInput: "blank",
       isResourcesNotSend: false,
       error: null,
@@ -19,12 +20,57 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const value = event.target.value;
-    const name = event.target.name;
+  componentDidMount() {
+    this.getCategoryNames();
+  }
 
+  getCategoryNames() {
+    fetch("/api/categories")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(catList => {
+        catList.map(cat => {
+          this.setState({
+            categoryNames: [
+              ...this.state.categoryNames,
+              {
+                category_name: cat.category_name,
+                selected: false
+              }
+            ]
+          });
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
+
+  handleChange(event) {
+    const checkboxArr = this.state.categoryNames;
+    if (event.target.type === "checkbox") {
+      checkboxArr.map(item => {
+        if (item.category_name.toLowerCase() === event.target.name) {
+          item.selected = !item.selected;
+        }
+      });
+    }
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    const name = event.target.name;
     this.setState({
       [name]: value,
+      categoryNames: checkboxArr,
       validInput: true
     });
   }
@@ -46,12 +92,21 @@ class Form extends React.Component {
         initalVote: 0
       });
 
+      let resourceCategories = [];
+
+      this.state.categoryNames.map(item => {
+        if (item.selected) {
+          resourceCategories.push(item.category_name);
+        }
+      });
+
       const resourceItem = {
         title: this.state.inputTitle,
         description: this.state.inputDescription,
         url: this.state.inputUrl,
         num_of_votes: this.state.initalVote,
-        resource_type: this.state.resourceType
+        resource_type: this.state.resourceType,
+        categories: resourceCategories
       };
 
       fetch("/api/resources", {
@@ -77,6 +132,18 @@ class Form extends React.Component {
   }
 
   render() {
+    let checkboxes = this.state.categoryNames.map((item, i) => {
+      return (
+        <div key={i}>
+          <input
+            type="checkbox"
+            onChange={this.handleChange}
+            name={item.category_name.toLowerCase()}
+          />
+          {item.category_name}
+        </div>
+      );
+    });
     return (
       <div className="form">
         <form className="add-form" onSubmit={this.handleSubmit}>
@@ -132,6 +199,7 @@ class Form extends React.Component {
                 placeholder=" Inter your URL..."
               />
             </div>
+            <div>{checkboxes}</div>
             {this.state.submitted ? (
               <p style={{ color: "green" }}>
                 THANK YOU ! Your resource has been added

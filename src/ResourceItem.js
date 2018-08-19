@@ -82,6 +82,7 @@ class ResourceItem extends Component {
           {resourceType}
         </div>
         <div className="row">
+          <span className="category-label">Description: </span>
           <p>{description}</p>
         </div>
         <div className="row">
