@@ -20,6 +20,7 @@ const db = pgp(connection);
 
 //ROUTES GO HERE
 router.get("/resources", (req, res) => {
+  // TO DO: return resources with categories list instead of just resources info. If so, delete categories-and-resource-id route.
   db
     .any(`SELECT * FROM resources`)
     .then(data => {
