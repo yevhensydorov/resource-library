@@ -67,6 +67,11 @@ export default class Header extends React.Component {
                   Project-Management
                 </Link>
               </NavItem>
+              <NavItem className="navItem">
+                <Link className="link" to="/Soft-Skills">
+                  Soft-Skills
+                </Link>
+              </NavItem>
             </Nav>
             <div className="text-right">
               <FormModalWindow receiverHeader={this.props.receiver} />
