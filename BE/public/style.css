@@ -14,7 +14,7 @@
 }
 
 .nav-item.navItem :hover {
-  color: greenyellow;
+  color: #666;
   background: white;
   border-radius: 6px;
   text-decoration: none;
