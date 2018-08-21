@@ -9,6 +9,7 @@ class Home extends React.Component {
     this.state = {
       resources: [],
       categories: [],
+      categoriesList: [],
       isFetched: false,
       isLoading: false,
       search: "",
@@ -16,13 +17,38 @@ class Home extends React.Component {
       select: "popular"
     };
     this.handleOpen = this.handleOpen.bind(this);
+    this.getCategoriesList = this.getCategoriesList.bind(this);
     this.getResourceItem = this.getResourceItem.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
+    this.getCategoriesList();
     this.getResources();
     this.getCategoriesAndResourceId();
+  }
+
+  getCategoriesList() {
+    fetch("/api/categories")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        this.setState({
+          categoriesList: data
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
   }
 
   getResources() {
