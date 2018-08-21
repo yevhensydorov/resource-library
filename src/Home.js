@@ -38,10 +38,11 @@ class Home extends React.Component {
         }
       })
       .then(res => res.json())
-      .then(data => {
-        // console.log(data);
-        this.setState({
-          categoriesList: data
+      .then(catList => {
+        catList.map(cat => {
+          this.setState({
+            categoriesList: [...this.state.categoriesList, cat.category_name]
+          });
         });
       })
       .catch(err => {
@@ -118,7 +119,14 @@ class Home extends React.Component {
     });
   }
   render() {
-    const { search, resources, categories, select, isToggling } = this.state;
+    const {
+      search,
+      resources,
+      categoriesList,
+      categories,
+      select,
+      isToggling
+    } = this.state;
     const sortFunction =
       isToggling && select === "alphabetical"
         ? (a, b) => {
@@ -130,7 +138,7 @@ class Home extends React.Component {
     return (
       <div className="col-md-12">
         <div className="header">
-          <Header receiver={this.getResourceItem} />
+          <Header receiver={this.getResourceItem} categories={categoriesList} />
         </div>
         <br />
         <div className="row col-sm-12">

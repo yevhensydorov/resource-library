@@ -25,6 +25,16 @@ export default class Header extends React.Component {
     });
   }
   render() {
+    const { receiver, categories } = this.props;
+    let catList = categories.map((cat, i) => {
+      return (
+        <NavItem key={i} className="navItem">
+          <Link className="link" to={cat}>
+            {cat}
+          </Link>
+        </NavItem>
+      );
+    });
     return (
       <div>
         <Navbar light expand="md">
@@ -32,49 +42,10 @@ export default class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem className="navItem">
-                <Link className="link" to="/HTML">
-                  HTML
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="/CSS">
-                  CSS
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="/JavaScript">
-                  JavaScript
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="/NodeJS">
-                  Node
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="React">
-                  React
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="/Database">
-                  Database
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="/Project-Management">
-                  Project-Management
-                </Link>
-              </NavItem>
-              <NavItem className="navItem">
-                <Link className="link" to="/Soft-Skills">
-                  Soft-Skills
-                </Link>
-              </NavItem>
+              {catList}
             </Nav>
             <div className="text-right">
-              <FormModalWindow receiverHeader={this.props.receiver} />
+              <FormModalWindow receiverHeader={receiver} />
             </div>
           </Collapse>
         </Navbar>

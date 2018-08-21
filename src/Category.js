@@ -10,6 +10,7 @@ class Home extends React.Component {
     this.state = {
       resources: [],
       categories: [],
+      categoriesList: [],
       isFetched: false,
       isLoading: false,
       search: "",
@@ -17,11 +18,13 @@ class Home extends React.Component {
       select: "popular"
     };
     this.handleOpen = this.handleOpen.bind(this);
+    this.getCategoriesList = this.getCategoriesList.bind(this);
     this.getResourceItem = this.getResourceItem.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
+    this.getCategoriesList();
     this.getResources();
     this.getCategoriesAndResourceId();
   }
@@ -32,6 +35,31 @@ class Home extends React.Component {
       this.getResources(category);
     }
   }
+
+  getCategoriesList() {
+    fetch("/api/categories")
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          throw new Error("HTTP error");
+        }
+      })
+      .then(res => res.json())
+      .then(catList => {
+        catList.map(cat => {
+          this.setState({
+            categoriesList: [...this.state.categoriesList, cat.category_name]
+          });
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err.toString()
+        });
+      });
+  }
+
   getResources() {
     fetch(`/api/categories/${this.props.match.params.category}`)
       .then(res => {
@@ -99,7 +127,14 @@ class Home extends React.Component {
     });
   }
   render() {
-    const { search, resources, categories, select, isToggling } = this.state;
+    const {
+      search,
+      resources,
+      categoriesList,
+      categories,
+      select,
+      isToggling
+    } = this.state;
     const sortFunction =
       isToggling && select === "alphabetical"
         ? (a, b) => {
@@ -111,7 +146,7 @@ class Home extends React.Component {
     return (
       <div className="col-md-12">
         <div className="header">
-          <Header receiver={this.getResourceItem} />
+          <Header receiver={this.getResourceItem} categories={categoriesList} />
         </div>
         <br />
         <div className="row col-md-12">

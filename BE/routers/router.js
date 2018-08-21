@@ -30,13 +30,9 @@ router.get("/resources", (req, res) => {
 });
 
 router.get("/categories", (req, res) => {
-  const listOfCategories = [];
   db
     .any(`SELECT category_name FROM categories`)
-    .then(data => {
-      data.map(item => listOfCategories.push(item.category_name));
-      res.json(listOfCategories);
-    })
+    .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });
 
