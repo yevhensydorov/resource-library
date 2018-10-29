@@ -122,6 +122,23 @@ h2.navbarBrand {
   margin-right: 0.4rem;
 }
 
+.dropdown a.dropdown-button {
+  color: #fff;
+  cursor: pointer;
+  padding-left: 10px;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.dropdown a.dropdown-button:hover {
+  color: #666;
+  background: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
 /* form  */
 
 input[type="text"],

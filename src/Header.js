@@ -53,7 +53,16 @@ export default class Header extends React.Component {
     });
     const dropdownList = (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropDownToggle}>
-        <DropdownToggle caret>More</DropdownToggle>
+        <DropdownToggle
+          // caret
+          className="dropdown-button"
+          tag="a"
+          onClick={this.dropDownToggle}
+          data-toggle="dropdown"
+          aria-expanded={this.state.dropdownOpen}
+        >
+          More
+        </DropdownToggle>
         <DropdownMenu>
           {dropDownItems.map((item, num) => {
             return (
