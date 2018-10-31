@@ -40,6 +40,7 @@ export default class Header extends React.Component {
     let dropDownItems = [];
     const catList = categories.map((cat, i) => {
       if (i <= 5) {
+        // TODO: add some state condition
         return (
           <NavItem key={i} className="navItem">
             <Link className="link" to={cat}>
@@ -52,9 +53,13 @@ export default class Header extends React.Component {
       }
     });
     const dropdownList = (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropDownToggle}>
+      <Dropdown
+        className="dropdown-container"
+        isOpen={this.state.dropdownOpen}
+        toggle={this.dropDownToggle}
+      >
         <DropdownToggle
-          // caret
+          caret
           className="dropdown-button"
           tag="a"
           onClick={this.dropDownToggle}
@@ -79,9 +84,11 @@ export default class Header extends React.Component {
       </Dropdown>
     );
     return (
-      <div>
-        <Navbar light expand="md">
-          <NavbarBrand href="/">CYF Library</NavbarBrand>
+      <div className="nav-container">
+        <Navbar className="nav-items" light expand="md">
+          <NavbarBrand className="logo" href="/">
+            CYF Library
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

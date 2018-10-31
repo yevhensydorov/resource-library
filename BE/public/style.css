@@ -19,19 +19,15 @@
   border-radius: 6px;
   text-decoration: none;
 }
-.navbar-light .navbar-brand {
-  color: white;
-  font-size: 27px;
-  font-weight: bold;
-}
+
 .link {
   color: white;
   font-weight: bold;
   font-size: 16px;
 }
 .nav-item.navItem {
-  padding-top: 15px;
-  padding-left: 10px;
+  padding-top: 1em;
+  padding-left: 0.8em;
 }
 .navbar-toggler {
   background: white;
@@ -97,6 +93,27 @@ h5 {
 .header {
   background-color: #45a049;
 }
+
+.nav-container {
+  width: 100%;
+  display: flex;
+}
+
+.nav-container .nav-items {
+  width: 100%;
+  margin-bottom: 0;
+}
+.nav-container .logo {
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.dropdown-container {
+  padding-top: 1em;
+  padding-left: 0.8em;
+}
+
 h2.navbarBrand {
   color: white;
   padding-top: 0px;
@@ -125,7 +142,6 @@ h2.navbarBrand {
 .dropdown a.dropdown-button {
   color: #fff;
   cursor: pointer;
-  padding-left: 10px;
   line-height: 20px;
   font-size: 16px;
   font-weight: bold;
