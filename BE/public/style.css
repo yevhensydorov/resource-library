@@ -14,10 +14,7 @@
 }
 
 .nav-item.navItem :hover {
-  color: #666;
-  background: white;
-  border-radius: 6px;
-  text-decoration: none;
+  color: #fff;
 }
 
 .link {
@@ -149,10 +146,8 @@ h2.navbarBrand {
 }
 
 .dropdown a.dropdown-button:hover {
-  color: #666;
-  background: white;
-  border-radius: 6px;
-  text-decoration: none;
+  color: #fff;
+  text-decoration: underline;
 }
 
 /* form  */
@@ -235,6 +230,17 @@ button[type="submit"]:hover {
   top: 24px;
   left: 18px;
   font-size: 19px;
+}
+
+/* Responsive*/
+@media screen and (max-width: 820px) {
+  .nav-item.navItem {
+    padding-left: 0.3em;
+  }
+
+  .dropdown-container {
+    padding-left: 0.3em;
+  }
 }
 
 @media screen and (max-width: 600px) {
