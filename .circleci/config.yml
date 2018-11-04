@@ -61,7 +61,7 @@ workflows:
     jobs:
       - build:
           context: build
-     - deploy_production:
+      - deploy_production:
           context: deployments
           requires:
             - build
