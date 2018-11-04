@@ -1,0 +1,80 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run tests here
+          command: echo "RUN TESTS!!!!!!"
+      - run:
+          name: Set env variables
+          command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: Docker build api
+          command: |
+            docker build -t codeyourfuture/resource-library:$VERSION --build-arg version=$VERSION ./backend
+            docker tag codeyourfuture/resource-library:$VERSION codeyourfuture/resource-library:latest
+      - run:
+          name: Docker login
+          command: echo "$DOCKER_PASS" | docker login -u $DOCKER_USER --password-stdin
+      - run:
+          name: Docker push frontend
+          command: docker push codeyourfuture/resource-library
+  
+  deploy_production:
+    docker:
+      - image: circleci/python:2.7-jessie
+    working_directory: ~/repo
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Set env variables
+          command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x kubectl
+      - run:
+          name: Install gnupg
+          command: sudo apt-get -y install gnupg
+      - run:
+          name: Get kubeconfig
+          command: aws s3 cp s3://$SECRETS_BUCKET/kubectl/config_cyfbot.gpg ./config.gpg
+      - run:
+          name: Decrypt kubeconfig and set KUBECONFIG
+          command: gpg --yes --passphrase="$GPG_KEY" config.gpg
+      - run:
+          name: Update k8s deployments
+          command: | 
+            KUBECONFIG=$(pwd)/config ./kubectl set image deployment/iom-dep-api iom-api=$CYF_PRIVATE_REPO/iom-api:$VERSION
+            KUBECONFIG=$(pwd)/config ./kubectl set image deployment/iom-dep-web iom-web=$CYF_PRIVATE_REPO/iom-web:$VERSION
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          context: build
+      - deploy_staging:
+          context: deployments_staging
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging
+      - deploy_production:
+          context: deployments
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - devops
