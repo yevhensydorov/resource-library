@@ -53,7 +53,7 @@ jobs:
       - run:
           name: Update k8s deployments
           command: | 
-            KUBECONFIG=$(pwd)/config ./kubectl set image deployment/resource-library resource-library=codeyourfuture/resource-library:$VERSION
+            KUBECONFIG=$(pwd)/config ./kubectl set image deployment/resource-library-dep resource-library=codeyourfuture/resource-library:$VERSION
 
 workflows:
   version: 2
