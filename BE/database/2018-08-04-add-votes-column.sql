@@ -1,0 +1,1 @@
+ALTER TABLE resources ADD COLUMN num_of_votes integer default 0;
