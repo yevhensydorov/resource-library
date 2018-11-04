@@ -1,6 +1,6 @@
 # Resources Library
 
-[![Build Status](https://travis-ci.org/yevhensydorov/resource-library.svg?branch=master)](https://travis-ci.org/yevhensydorov/resource-library)
+[![CircleCI](https://circleci.com/gh/CodeYourFuture/resource-library.svg?style=svg)](https://circleci.com/gh/CodeYourFuture/resource-library)
 
 ## Getting Started
 
