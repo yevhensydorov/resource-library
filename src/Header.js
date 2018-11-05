@@ -38,9 +38,18 @@ export default class Header extends React.Component {
   render() {
     const { receiver, categories } = this.props;
     let dropDownItems = [];
+    let dropdownList;
     const catList = categories.map((cat, i) => {
       if (i <= 5) {
         // TODO: add some state condition
+        return (
+          <NavItem key={i} className="navItem">
+            <Link className="link" to={cat}>
+              {cat}
+            </Link>
+          </NavItem>
+        );
+      } else if (this.state.isOpen) {
         return (
           <NavItem key={i} className="navItem">
             <Link className="link" to={cat}>
@@ -52,37 +61,42 @@ export default class Header extends React.Component {
         dropDownItems.push(cat);
       }
     });
-    const dropdownList = (
-      <Dropdown
-        className="dropdown-container"
-        isOpen={this.state.dropdownOpen}
-        toggle={this.dropDownToggle}
-      >
-        <DropdownToggle
-          caret
-          className="dropdown-button"
-          tag="a"
-          onClick={this.dropDownToggle}
-          data-toggle="dropdown"
-          aria-expanded={this.state.dropdownOpen}
+    if (dropDownItems.length === 0) {
+      dropdownList = undefined;
+    } else {
+      dropdownList = (
+        <Dropdown
+          className="dropdown-container"
+          isOpen={this.state.dropdownOpen}
+          toggle={this.dropDownToggle}
         >
-          More
-        </DropdownToggle>
-        <DropdownMenu>
-          {dropDownItems.map((item, num) => {
-            return (
-              <DropdownItem key={num}>
-                <NavItem className="navItem">
-                  <Link className="link" to={item}>
-                    {item}
-                  </Link>
-                </NavItem>
-              </DropdownItem>
-            );
-          })}
-        </DropdownMenu>
-      </Dropdown>
-    );
+          <DropdownToggle
+            caret
+            className="dropdown-button"
+            tag="a"
+            onClick={this.dropDownToggle}
+            data-toggle="dropdown"
+            aria-expanded={this.state.dropdownOpen}
+          >
+            More
+          </DropdownToggle>
+          <DropdownMenu>
+            {dropDownItems.map((item, num) => {
+              return (
+                <DropdownItem key={num}>
+                  <NavItem className="navItem">
+                    <Link className="link" to={item}>
+                      {item}
+                    </Link>
+                  </NavItem>
+                </DropdownItem>
+              );
+            })}
+          </DropdownMenu>
+        </Dropdown>
+      );
+    }
+
     return (
       <div className="nav-container">
         <Navbar className="nav-items" light expand="md">
