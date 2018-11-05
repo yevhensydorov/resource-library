@@ -150,6 +150,18 @@ h2.navbarBrand {
   text-decoration: underline;
 }
 
+.dropdown-container .dropdown-menu {
+  background-color: #45a049;
+}
+
+.dropdown-menu .nav-item.navItem {
+  padding-top: 0;
+  padding-left: 0;
+}
+
+.dropdown-menu .dropdown-item {
+  background-color: transparent;
+}
 /* form  */
 
 input[type="text"],
