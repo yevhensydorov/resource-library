@@ -8,7 +8,7 @@ if (process.env.DATABASE_URL) {
   connection = process.env.DATABASE_URL;
 } else {
   connection = {
-    host: process.env.DATABASE_HOST,
+    host: process.env.DB_HOST,
     port: 5432,
     database: process.env.DATABASE,
     user: process.env.USERNAME,
