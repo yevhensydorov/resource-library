@@ -109,7 +109,7 @@ export default class Header extends React.Component {
               {catList}
               {dropdownList}
             </Nav>
-            <div className="text-right">
+            <div className="text-center">
               <FormModalWindow receiverHeader={receiver} />
             </div>
           </Collapse>
