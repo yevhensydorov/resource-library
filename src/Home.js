@@ -140,7 +140,7 @@ class Home extends React.Component {
         <header className="header">
           <Header receiver={this.getResourceItem} categories={categoriesList} />
         </header>
-        <div className="row col-sm-12">
+        <div className="app-container row col-sm-12">
           <div className="main-wrapper col-sm-8 col-sm-push-2">
             <div className="row">
               <div className="col-sm-12">

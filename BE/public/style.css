@@ -26,6 +26,11 @@
   padding-top: 1em;
   padding-left: 0.8em;
 }
+
+.nav-items .nav-item.navItem a:focus {
+  outline: none;
+  color: white;
+}
 .navbar-toggler {
   background: white;
 }
@@ -115,6 +120,10 @@ h5 {
   padding-left: 0.8em;
 }
 
+.modal-btn-container {
+  text-align: right;
+}
+
 h2.navbarBrand {
   color: white;
   padding-top: 0px;
@@ -122,6 +131,11 @@ h2.navbarBrand {
 .resources h2 {
   text-align: center;
 }
+
+.app-container {
+  margin: 0 auto;
+}
+
 .main-wrapper {
   display: -webkit-flex;
   display: -moz-flex;
@@ -264,6 +278,10 @@ button[type="submit"]:hover {
 
   .nav-container .collapse .navbar-nav {
     margin: 0;
+  }
+
+  .modal-btn-container {
+    text-align: center;
   }
 }
 
