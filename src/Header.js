@@ -19,6 +19,7 @@ export default class Header extends React.Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.closeNavbar = this.closeNavbar.bind(this);
     this.dropDownToggle = this.dropDownToggle.bind(this);
     this.state = {
       isOpen: false,
@@ -29,6 +30,11 @@ export default class Header extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+  closeNavbar() {
+    if (this.state.isOpen) {
+      this.toggle();
+    }
   }
   dropDownToggle() {
     this.setState({
@@ -44,7 +50,7 @@ export default class Header extends React.Component {
         // TODO: add some state condition
         return (
           <NavItem key={i} className="navItem">
-            <Link className="link" to={cat}>
+            <Link className="link" to={cat} onClick={this.closeNavbar}>
               {cat}
             </Link>
           </NavItem>
@@ -52,7 +58,7 @@ export default class Header extends React.Component {
       } else if (this.state.isOpen) {
         return (
           <NavItem key={i} className="navItem">
-            <Link className="link" to={cat}>
+            <Link className="link" to={cat} onClick={this.closeNavbar}>
               {cat}
             </Link>
           </NavItem>
