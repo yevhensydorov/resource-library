@@ -236,11 +236,9 @@ button[type="submit"]:hover {
   border-bottom: 1px solid #fff !important ;
   height: 40px;
 }
-
-.modal-dialog {
-  margin-top: 17% !important;
+.add-form label {
+  display: block;
 }
-
 .modal-backdrop.fade {
   opacity: 0.6 !important;
 }
@@ -283,6 +281,22 @@ button[type="submit"]:hover {
   .modal-btn-container {
     text-align: center;
   }
+
+  .modal-dialog {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .modal-content {
+    margin-top: 15em;
+  }
+
+  .modal-dialog .modal-header {
+    padding-right: 1em;
+    padding-top: 0px;
+    border-bottom: 1px solid #fff;
+    height: 1.2em;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -293,8 +307,9 @@ button[type="submit"]:hover {
   .main-wrapper {
     min-width: 100%;
   }
-  .modal-dialog {
-    margin-top: 130px !important;
+  .form {
+    border-radius: 0.4em;
+    padding: 0.5em;
   }
 }
 
@@ -321,5 +336,28 @@ button[type="submit"]:hover {
     float: none;
     display: block;
     text-align: left;
+  }
+  .add-form legend {
+    margin-bottom: 0.35em;
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .add-form label {
+    font-weight: normal;
+    font-size: 0.9em;
+  }
+
+  input[type="text"],
+  select,
+  .descriptionText {
+    margin: 0 0 0.3em 0;
+    padding: 0.3em;
+    font-size: 0.9em;
+  }
+
+  .add-form .checkbox-container {
+    font-size: 0.9em;
   }
 }

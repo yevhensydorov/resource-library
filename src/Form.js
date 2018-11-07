@@ -134,22 +134,21 @@ class Form extends React.Component {
   render() {
     let checkboxes = this.state.categoryNames.map((item, i) => {
       return (
-        <div key={i}>
+        <label key={i}>
           <input
             type="checkbox"
             onChange={this.handleChange}
             name={item.category_name.toLowerCase()}
           />
           {item.category_name}
-        </div>
+        </label>
       );
     });
     return (
       <div className="form">
         <form className="add-form" onSubmit={this.handleSubmit}>
           <fieldset>
-            <legend>Add Your Resource:</legend>
-            <br />
+            <legend>Add Your Resource</legend>
             <div>
               <label htmlFor="inputTitle">Resource Title</label>
               <input
@@ -196,13 +195,13 @@ class Form extends React.Component {
                 value={this.state.inputUrl}
                 id="inputUrl"
                 name="inputUrl"
-                placeholder=" Inter your URL..."
+                placeholder=" Type your URL..."
               />
             </div>
-            <div>{checkboxes}</div>
+            <div className="checkbox-container">{checkboxes}</div>
             {this.state.submitted ? (
               <p style={{ color: "green" }}>
-                THANK YOU ! Your resource has been added
+                THANK YOU! Your resource has been added
               </p>
             ) : null}
             <button type="submit">Submit</button>
