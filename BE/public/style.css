@@ -300,16 +300,60 @@ select,
 }
 
 /* Responsive*/
-
-@media screen and (max-width: 480px) {
-  .modal .modal-dialog {
-    width: 70%;
+@media screen and (max-width: 820px) {
+  .nav-item.navItem {
+    padding-left: 0.3em;
   }
+
+  .dropdown-container {
+    padding-left: 0.3em;
+  }
+
+  .nav-container .collapse {
+    text-align: center;
+  }
+
+  .nav-container .collapse .navbar-nav {
+    margin: 0;
+  }
+
+  .modal-btn-container {
+    text-align: center;
+  }
+
+  .modal .modal-dialog {
+    width: 45%;
+  }
+
+  /* .modal-dialog {
+    width: 90%;
+    margin: 0 auto;
+  } */
+
+  /* .modal-dialog .modal-header {
+    padding-right: 1em;
+    padding-top: 0px;
+    border-bottom: 1px solid #fff;
+    height: 1.2em;
+  } */
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
+  body {
+    padding-right: 1px;
+    padding-left: 1px;
+  }
+  .main-wrapper {
+    min-width: 100%;
+  }
+
   .modal .modal-dialog {
     width: 55%;
+  }
+
+  .form {
+    border-radius: 0.4em;
+    padding: 0.5em;
   }
 }
 
@@ -367,59 +411,14 @@ select,
   } */
 }
 
-@media screen and (max-width: 768px) {
-  body {
-    padding-right: 1px;
-    padding-left: 1px;
-  }
-  .main-wrapper {
-    min-width: 100%;
-  }
-
+@media screen and (max-width: 576px) {
   .modal .modal-dialog {
     width: 55%;
   }
-
-  .form {
-    border-radius: 0.4em;
-    padding: 0.5em;
-  }
 }
 
-@media screen and (max-width: 820px) {
-  .nav-item.navItem {
-    padding-left: 0.3em;
-  }
-
-  .dropdown-container {
-    padding-left: 0.3em;
-  }
-
-  .nav-container .collapse {
-    text-align: center;
-  }
-
-  .nav-container .collapse .navbar-nav {
-    margin: 0;
-  }
-
-  .modal-btn-container {
-    text-align: center;
-  }
-
+@media screen and (max-width: 480px) {
   .modal .modal-dialog {
-    width: 45%;
+    width: 70%;
   }
-
-  /* .modal-dialog {
-    width: 90%;
-    margin: 0 auto;
-  } */
-
-  /* .modal-dialog .modal-header {
-    padding-right: 1em;
-    padding-top: 0px;
-    border-bottom: 1px solid #fff;
-    height: 1.2em;
-  } */
 }
