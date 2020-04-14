@@ -13,7 +13,7 @@ class Form extends React.Component {
       isResourcesNotSend: false,
       error: null,
       initalVote: 0,
-      resourceType: ""
+      resourceType: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,30 +26,30 @@ class Form extends React.Component {
 
   getCategoryNames() {
     fetch("/api/categories")
-      .then(res => {
+      .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
           throw new Error("HTTP error");
         }
       })
-      .then(res => res.json())
-      .then(catList => {
-        catList.map(cat => {
+      .then((res) => res.json())
+      .then((catList) => {
+        catList.map((cat) => {
           this.setState({
             categoryNames: [
               ...this.state.categoryNames,
               {
                 category_name: cat.category_name,
-                selected: false
-              }
-            ]
+                selected: false,
+              },
+            ],
           });
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
-          error: err.toString()
+          error: err.toString(),
         });
       });
   }
@@ -57,7 +57,7 @@ class Form extends React.Component {
   handleChange(event) {
     const checkboxArr = this.state.categoryNames;
     if (event.target.type === "checkbox") {
-      checkboxArr.map(item => {
+      checkboxArr.map((item) => {
         if (item.category_name.toLowerCase() === event.target.name) {
           item.selected = !item.selected;
         }
@@ -71,7 +71,7 @@ class Form extends React.Component {
     this.setState({
       [name]: value,
       categoryNames: checkboxArr,
-      validInput: true
+      validInput: true,
     });
   }
 
@@ -89,12 +89,12 @@ class Form extends React.Component {
         inputDescription: "",
         inputUrl: "",
         resourceType: "",
-        initalVote: 0
+        initalVote: 0,
       });
 
       let resourceCategories = [];
 
-      this.state.categoryNames.map(item => {
+      this.state.categoryNames.map((item) => {
         if (item.selected) {
           resourceCategories.push(item.category_name);
         }
@@ -106,27 +106,27 @@ class Form extends React.Component {
         url: this.state.inputUrl,
         num_of_votes: this.state.initalVote,
         resource_type: this.state.resourceType,
-        categories: resourceCategories
+        categories: resourceCategories,
       };
 
       fetch("/api/resources", {
         method: "POST",
         body: JSON.stringify(resourceItem),
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
       })
-        .then(response => response.json())
-        .then(body => {
+        .then((response) => response.json())
+        .then((body) => {
           this.props.receiver(body);
         })
-        .catch(err => {
+        .catch((err) => {
           this.setState({
             isResourcesNotSend: true,
-            error: err
+            error: err,
           });
         }); // TO DO ADD ERROR MESSAGE TO USER IF SOMETHING WRONG WITH ADD TO DB
     } else {
       this.setState({
-        validInput: false
+        validInput: false,
       });
     }
   }
@@ -134,22 +134,21 @@ class Form extends React.Component {
   render() {
     let checkboxes = this.state.categoryNames.map((item, i) => {
       return (
-        <div key={i}>
+        <label key={i}>
           <input
             type="checkbox"
             onChange={this.handleChange}
             name={item.category_name.toLowerCase()}
           />
           {item.category_name}
-        </div>
+        </label>
       );
     });
     return (
       <div className="form">
         <form className="add-form" onSubmit={this.handleSubmit}>
           <fieldset>
-            <legend>Add Your Resource:</legend>
-            <br />
+            <legend>Add Your Resource</legend>
             <div>
               <label htmlFor="inputTitle">Resource Title</label>
               <input
@@ -196,13 +195,13 @@ class Form extends React.Component {
                 value={this.state.inputUrl}
                 id="inputUrl"
                 name="inputUrl"
-                placeholder=" Inter your URL..."
+                placeholder=" Type your URL..."
               />
             </div>
-            <div>{checkboxes}</div>
+            <div className="checkbox-container">{checkboxes}</div>
             {this.state.submitted ? (
               <p style={{ color: "green" }}>
-                THANK YOU ! Your resource has been added
+                THANK YOU! Your resource has been added
               </p>
             ) : null}
             <button type="submit">Submit</button>

@@ -3,16 +3,14 @@
     "browser": true
   },
   "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "plugins": [
-    "react"
-  ],
-  "extends": [
-    "plugin:react/recommended"
-  ],
+  "plugins": ["react"],
+  "extends": ["plugin:react/recommended"],
   "rules": {
     "react/prop-types": "off"
   }

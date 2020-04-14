@@ -15,7 +15,7 @@ class Home extends React.Component {
       isLoading: false,
       search: "",
       error: null,
-      select: "popular"
+      select: "popular",
     };
     this.handleOpen = this.handleOpen.bind(this);
     this.getCategoriesList = this.getCategoriesList.bind(this);
@@ -38,81 +38,81 @@ class Home extends React.Component {
 
   getCategoriesList() {
     fetch("/api/categories")
-      .then(res => {
+      .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
           throw new Error("HTTP error");
         }
       })
-      .then(res => res.json())
-      .then(catList => {
-        catList.map(cat => {
+      .then((res) => res.json())
+      .then((catList) => {
+        catList.map((cat) => {
           this.setState({
-            categoriesList: [...this.state.categoriesList, cat.category_name]
+            categoriesList: [...this.state.categoriesList, cat.category_name],
           });
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
-          error: err.toString()
+          error: err.toString(),
         });
       });
   }
 
   getResources() {
     fetch(`/api/categories/${this.props.match.params.category}`)
-      .then(res => {
+      .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
           throw new Error("HTTP error");
         }
       })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         this.setState({
-          resources: data
+          resources: data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
-          error: err.toString()
+          error: err.toString(),
         });
       });
   }
 
   getCategoriesAndResourceId() {
     fetch("/api/categories-and-resource-id")
-      .then(res => {
+      .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           return res;
         } else {
           throw new Error("HTTP error");
         }
       })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         this.setState({
-          categories: data
+          categories: data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
-          error: err.toString()
+          error: err.toString(),
         });
       });
   }
 
   getResourceItem(resourceItem) {
     this.setState({
-      resources: this.state.resources.concat(resourceItem)
+      resources: this.state.resources.concat(resourceItem),
     });
   }
 
   handleSearch(event) {
     this.setState({
-      search: event.target.value
+      search: event.target.value,
     });
   }
 
@@ -123,7 +123,7 @@ class Home extends React.Component {
   handleOpen(state, select) {
     this.setState({
       isToggling: state,
-      select: select
+      select: select,
     });
   }
   render() {
@@ -133,7 +133,7 @@ class Home extends React.Component {
       categoriesList,
       categories,
       select,
-      isToggling
+      isToggling,
     } = this.state;
     const sortFunction =
       isToggling && select === "alphabetical"
@@ -144,13 +144,12 @@ class Home extends React.Component {
           }
         : (a, b) => b.num_of_votes - a.num_of_votes;
     return (
-      <div className="col-md-12">
-        <div className="header">
+      <div>
+        <header className="header">
           <Header receiver={this.getResourceItem} categories={categoriesList} />
-        </div>
-        <br />
-        <div className="row col-md-12">
-          <div className="main-wrapper col-md-8 col-md-push-2">
+        </header>
+        <div className="app-container row col-sm-12">
+          <div className="main-wrapper col-sm-8 col-sm-push-2">
             <div className="row">
               <div className="col-sm-12">
                 <Search

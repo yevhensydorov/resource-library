@@ -1,4 +1,6 @@
-FROM node:8.11.2
+FROM node:8.12-alpine
+
+RUN adduser -D rl && mkdir /app
 
 WORKDIR  /app
 
@@ -9,8 +11,8 @@ RUN npm install
 
 COPY . /app
 
-RUN npm run build
+RUN npm run build && chown -R rl /app
+USER rl
 
-
-EXPOSE 7001
+EXPOSE 7000
 CMD ["npm", "start"]
